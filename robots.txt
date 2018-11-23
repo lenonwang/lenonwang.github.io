@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /categories/
+Allow: /archives/
+Allow: /tags/ 
+Disallow: /vendors/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+Disallow: /vendors/
+Disallow: /fancybox/
+
+Sitemap: http://www.nanxiangyuan.shop/sitemap.xml
+Sitemap: http://www.nanxiangyuan.shop/baidusitemap.xml
