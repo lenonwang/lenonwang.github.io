@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="java,shell," />
+  <meta name="keywords" content="linux," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="使用java编写shell脚本，其实，shell的脚本也可以用java或者其他的语言来编写。  一、准备1、Beanshell下载这个工具的作用是使的shell可以支持java语言。下载地址：www.beanshell.org。 2、需要配置java sdk这个不赘述，网上有很多的mac os配置教程。 二、配置1、将下载好的包放入放到一个目录（例如/opt/beanshell/beanshel">
-<meta name="keywords" content="java,shell">
+<meta name="description" content="Linux 查看磁盘空间： df -h 查看某一进程的的pid捷方式：pgrep -f name根据pid杀死进程的操作方式：pkill -f pid netstat的使用获取进程名、进程号以及用户 IDnetstat -nlpthttps://linux.cn/article-2434-1.html">
+<meta name="keywords" content="linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用java编写shell">
-<meta property="og:url" content="http://www.nanxiangyuan.shop/2018/04/18/使用java编写shell/index.html">
+<meta property="og:title" content="linux进程操作PID">
+<meta property="og:url" content="http://www.nanxiangyuan.shop/2018/12/20/linux进程操作/index.html">
 <meta property="og:site_name" content="Tech KingDom">
-<meta property="og:description" content="使用java编写shell脚本，其实，shell的脚本也可以用java或者其他的语言来编写。  一、准备1、Beanshell下载这个工具的作用是使的shell可以支持java语言。下载地址：www.beanshell.org。 2、需要配置java sdk这个不赘述，网上有很多的mac os配置教程。 二、配置1、将下载好的包放入放到一个目录（例如/opt/beanshell/beanshel">
+<meta property="og:description" content="Linux 查看磁盘空间： df -h 查看某一进程的的pid捷方式：pgrep -f name根据pid杀死进程的操作方式：pkill -f pid netstat的使用获取进程名、进程号以及用户 IDnetstat -nlpthttps://linux.cn/article-2434-1.html">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-13T12:11:55.691Z">
+<meta property="og:updated_time" content="2018-12-20T12:11:26.792Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用java编写shell">
-<meta name="twitter:description" content="使用java编写shell脚本，其实，shell的脚本也可以用java或者其他的语言来编写。  一、准备1、Beanshell下载这个工具的作用是使的shell可以支持java语言。下载地址：www.beanshell.org。 2、需要配置java sdk这个不赘述，网上有很多的mac os配置教程。 二、配置1、将下载好的包放入放到一个目录（例如/opt/beanshell/beanshel">
+<meta name="twitter:title" content="linux进程操作PID">
+<meta name="twitter:description" content="Linux 查看磁盘空间： df -h 查看某一进程的的pid捷方式：pgrep -f name根据pid杀死进程的操作方式：pkill -f pid netstat的使用获取进程名、进程号以及用户 IDnetstat -nlpthttps://linux.cn/article-2434-1.html">
 
 
 
@@ -127,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://www.nanxiangyuan.shop/2018/04/18/使用java编写shell/"/>
+  <link rel="canonical" href="http://www.nanxiangyuan.shop/2018/12/20/linux进程操作/"/>
 
 
 
 
 
-  <title>使用java编写shell | Tech KingDom</title>
+  <title>linux进程操作PID | Tech KingDom</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.nanxiangyuan.shop/2018/04/18/使用java编写shell/">
+    <link itemprop="mainEntityOfPage" href="http://www.nanxiangyuan.shop/2018/12/20/linux进程操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Leo Wang">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用java编写shell</h1>
+          <h1 class="post-title" itemprop="name headline">linux进程操作PID</h1>
         
 
         <div class="post-meta">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-18T13:46:47+08:00">
-                2018-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-20T20:05:43+08:00">
+                2018-12-20
               </time>
             
 
@@ -384,7 +384,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  327
+                  65
                 </span>
               
 
@@ -421,15 +421,9 @@
       
 
       
-        <blockquote>
-<p>使用java编写shell脚本，其实，shell的脚本也可以用java或者其他的语言来编写。</p>
-</blockquote>
-<h3 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h3><p>1、Beanshell下载<br><br>这个工具的作用是使的shell可以支持java语言。下载地址：<a href="www.beanshell.org">www.beanshell.org</a>。</p>
-<p>2、需要配置java sdk这个不赘述，网上有很多的mac os配置教程。</p>
-<h3 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h3><p>1、将下载好的包放入放到一个目录（例如/opt/beanshell/beanshell.jar） ，并将这个位置，配置到classPath路径下，记住了，是classPath路径而不是path路径。不然，运行时会报错的。</p>
-<p>2、编写shell脚本文件，文件头标注为<font color="red">#!/usr/bin/java bsh.Interpreter<br></font>前者时java命令的位置，mac os配置好java后，命令的位置就是上面的位置，其他的系统另当别论了。后者就是bean shell中的解释器了，很好理解不是吗？</p>
-<p>3、使用java语言编写一个脚本试试看吧。应该是可以成功运行了Java编写的shell脚本了。而且，现在的版本的beanshell比以往更加的强大了点。不需要你进行手动的类型引入了。</p>
-<p>总结：教程很简单，就是为了给已经掌握一门开发语言的人，提供下便利的通道，这样写shell就会简单的多了不是吗？😁</p>
+        <p>Linux 查看磁盘空间： df -h</p>
+<p>查看某一进程的的pid捷方式：pgrep -f name<br>根据pid杀死进程的操作方式：pkill -f pid</p>
+<p>netstat的使用获取进程名、进程号以及用户 ID<br>netstat -nlpt<br><a href="https://linux.cn/article-2434-1.html" target="_blank" rel="noopener">https://linux.cn/article-2434-1.html</a></p>
 
       
     </div>
@@ -479,7 +473,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.nanxiangyuan.shop/2018/04/18/使用java编写shell/" title="使用java编写shell">http://www.nanxiangyuan.shop/2018/04/18/使用java编写shell/</a>
+    <a href="http://www.nanxiangyuan.shop/2018/12/20/linux进程操作/" title="linux进程操作PID">http://www.nanxiangyuan.shop/2018/12/20/linux进程操作/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -494,9 +488,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
-          
-            <a href="/tags/shell/" rel="tag"># shell</a>
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -509,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/03/智能pos返回结果整理/" rel="next" title="智能pos返回结果整理">
-                <i class="fa fa-chevron-left"></i> 智能pos返回结果整理
+              <a href="/2018/12/17/屏幕各尺寸的获取/" rel="next" title="屏幕各尺寸的获取">
+                <i class="fa fa-chevron-left"></i> 屏幕各尺寸的获取
               </a>
             
           </div>
@@ -518,10 +510,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/02/method/" rel="prev" title="编程之法">
-                编程之法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -604,17 +592,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -699,22 +678,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、准备"><span class="nav-number">1.</span> <span class="nav-text">一、准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、配置"><span class="nav-number">2.</span> <span class="nav-text">二、配置</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
