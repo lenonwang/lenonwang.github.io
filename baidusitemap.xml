@@ -4,8 +4,26 @@
 
     
   <url>
+    <loc>http://www.nanxiangyuan.shop/2018/12/24/%E6%94%B6%E9%93%B6%E5%8F%B0%E9%85%8D%E7%BD%AE%E5%9C%B0%E5%9D%80/</loc>
+    <lastmod>2018-12-24T03:06:22.015Z</lastmod>
+    <data>
+        <display>
+        <title>收银台配置地址</title>
+        <pubTime>2018-12-24T03:00:31.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android研发" url="http://www.nanxiangyuan.shop/categories/Android%E7%A0%94%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.nanxiangyuan.shop/2018/12/20/linux%E8%BF%9B%E7%A8%8B%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2018-12-20T12:11:26.792Z</lastmod>
+    <lastmod>2018-12-24T03:05:54.075Z</lastmod>
     <data>
         <display>
         <title>linux进程操作PID</title>
@@ -73,9 +91,9 @@
         
         <tag>文档</tag>
          
-        <tag>收银台</tag>
-         
         <tag>sdk</tag>
+         
+        <tag>收银台</tag>
          
          
            
@@ -121,9 +139,9 @@
          
         <tag>文档</tag>
          
-        <tag>收银台</tag>
-         
         <tag>sdk</tag>
+         
+        <tag>收银台</tag>
          
          
            
@@ -239,24 +257,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.nanxiangyuan.shop/2018/01/19/Android%E9%85%8D%E7%BD%AE%E6%9E%84%E5%BB%BA%E5%8F%98%E4%BD%93/</loc>
-    <lastmod>2018-11-13T12:11:49.829Z</lastmod>
-    <data>
-        <display>
-        <title>Android配置构建变体</title>
-        <pubTime>2018-01-19T07:41:16.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Android研发" url="http://www.nanxiangyuan.shop/categories/Android%E7%A0%94%E5%8F%91/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://www.nanxiangyuan.shop/2018/01/05/JavaScript%E4%B8%8Eandroid%E9%80%9A%E4%BF%A1%E6%A1%86%E6%9E%B6%E5%AE%9E%E7%8E%B0/</loc>
@@ -353,9 +353,9 @@
          
         <tag>文档</tag>
          
-        <tag>收银台</tag>
-         
         <tag>sdk</tag>
+         
+        <tag>收银台</tag>
          
          
            
