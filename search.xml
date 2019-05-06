@@ -126,7 +126,7 @@
   <entry>
     <title><![CDATA[建行POS相关信息]]></title>
     <url>%2F2018%2F05%2F06%2F%E5%BB%BA%E8%A1%8CPos%2F</url>
-    <content type="text"><![CDATA[建行PosNotifyrxjAVAHandlerControllerModelinterface render interface request params reponse callback callback interface request params trans =&gt; sdTranspostType landi_zpos =&gt; sd_zpos成功失败只取决于 respCoderespCode 1:成功 -2:取消 -1:失败 sdTrans数据如下：| amount | 金额 || ———– | ——– || traceNo | 流水号 || referenceNo | 参考号 || cardNo | 卡号 || batchNo | 批次号 || terminalId | 终端号 || merchantId | 商户号 || date | 交易日期 || time | 交易时间 || transType | 交易类型 || tradeTime | 交易时间 || respCode | 交易结果 || msg | 信息描述 || orderNo | 订单号 | reponse callback pay interface request params deviceNum landi_zpos =&gt; sd_zpos reponse callback domainmodelUIXMind: ZEN - Trial Version]]></content>
+    <content type="text"><![CDATA[建行PosNotifyrxjAVAHandlerControllerModelinterface render interface request params reponse callback callback interface request params trans =&gt; sdTranspostType landi_zpos =&gt; sd_zpos成功失败只取决于 respCoderespCode 1:成功 -2:取消 -1:失败 sdTrans数据如下：| amount | 金额 || ———– | ——– || traceNo | 流水号 || referenceNo | 参考号 || cardNo | 卡号 || batchNo | 批次号 || terminalId | 终端号 || merchantId | 商户号 || date | 交易日期 || time | 交易时间 || transType | 交易类型 || tradeTime | 交易时间 || respCode | 交易结果 || msg | 信息描述 || orderNo | 订单号 | reponse callback pay interface request params deviceNum landi_zpos =&gt; sd_zpos reponse callback domainmodelUI]]></content>
       <categories>
         <category>Android研发</category>
       </categories>
