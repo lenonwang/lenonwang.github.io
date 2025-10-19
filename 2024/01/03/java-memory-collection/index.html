@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lenonwang.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="- Nemo&amp; - java内存模型篇 这次所讲述的是运行时数据区的最后一个部分  从线程共享与否的角度来看  ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应用就是数据库连接管理，以及会话管理 栈、堆、方法区的交互关系 下面就涉及了对象的访问定位   Person：存放在元空间，也可以说方法区 person：存放在 Java 栈的局部变量表中 new Person(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JVM之内存与垃圾回收篇】方法区">
+<meta property="og:url" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/index.html">
+<meta property="og:site_name" content="程序猿">
+<meta property="og:description" content="- Nemo&amp; - java内存模型篇 这次所讲述的是运行时数据区的最后一个部分  从线程共享与否的角度来看  ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应用就是数据库连接管理，以及会话管理 栈、堆、方法区的交互关系 下面就涉及了对象的访问定位   Person：存放在元空间，也可以说方法区 person：存放在 Java 栈的局部变量表中 new Person(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lenonwang.github.io/uploads/andrew-liu-2nx1Z70CT8I-unsplash.jpg">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213213903-1357712489.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213219437-1252670091.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213225285-1567727957.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213232981-1950057405.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213244108-302140429.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213249908-1084189353.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213256534-1081297873.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213305819-860183824.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213312363-1838469801.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213324512-711283315.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213330565-987936858.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213348107-1377674924.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213354970-1212597160.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213359099-483522965.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213404744-285710312.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213412154-410049567.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213418030-1870134246.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213423379-1369605517.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213428582-1126679088.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213436180-896344092.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213441766-2133918021.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213448897-153651410.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213516630-1510588738.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213522166-615927757.png">
+<meta property="og:image" content="https://lenonwang.github.io/2024/01/03/java-memory-collection/1542615-20200713213530555-2123448191.png">
+<meta property="article:published_time" content="2024-01-03T16:11:22.000Z">
+<meta property="article:modified_time" content="2025-10-19T11:42:35.217Z">
+<meta property="article:author" content="Buffer">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="内存模型">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lenonwang.github.io/uploads/andrew-liu-2nx1Z70CT8I-unsplash.jpg">
+
+
+<link rel="canonical" href="https://lenonwang.github.io/2024/01/03/java-memory-collection/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lenonwang.github.io/2024/01/03/java-memory-collection/","path":"2024/01/03/java-memory-collection/","title":"【JVM之内存与垃圾回收篇】方法区"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【JVM之内存与垃圾回收篇】方法区 | 程序猿</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">程序猿</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Half as much, twice as elegant.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">- Nemo&amp; - java内存模型篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%E3%80%81%E5%A0%86%E3%80%81%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E4%BA%A4%E4%BA%92%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.</span> <span class="nav-text">栈、堆、方法区的交互关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E7%90%86%E8%A7%A3"><span class="nav-number">1.2.</span> <span class="nav-text">方法区的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HotSpot%E4%B8%AD%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E6%BC%94%E8%BF%9B"><span class="nav-number">1.3.</span> <span class="nav-text">HotSpot中方法区的演进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%96%B9%E6%B3%95%E5%8C%BA%E5%A4%A7%E5%B0%8F%E4%B8%8E-OOM"><span class="nav-number">1.4.</span> <span class="nav-text">设置方法区大小与 OOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk7%E5%8F%8A%E4%BB%A5%E5%89%8D"><span class="nav-number">1.5.</span> <span class="nav-text">jdk7及以前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK8%E4%BB%A5%E5%90%8E"><span class="nav-number">1.6.</span> <span class="nav-text">JDK8以后</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E8%BF%99%E4%BA%9BOOM"><span class="nav-number">1.7.</span> <span class="nav-text">如何解决这些OOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.8.</span> <span class="nav-text">方法区的内部结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">1.9.</span> <span class="nav-text">类型信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%9F-Field-%E4%BF%A1%E6%81%AF"><span class="nav-number">1.10.</span> <span class="nav-text">域(Field)信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%EF%BC%88Method%EF%BC%89%E4%BF%A1%E6%81%AF"><span class="nav-number">1.11.</span> <span class="nav-text">方法（Method）信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#non-final%E7%9A%84%E7%B1%BB%E5%8F%98%E9%87%8F"><span class="nav-number">1.12.</span> <span class="nav-text">non-final的类变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%B8%B8%E9%87%8F"><span class="nav-number">1.13.</span> <span class="nav-text">全局常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0-VS-%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.14.</span> <span class="nav-text">运行时常量池 VS 常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.15.</span> <span class="nav-text">常量池</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.15.1.</span> <span class="nav-text">为什么需要常量池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E6%B1%A0%E4%B8%AD%E6%9C%89%E4%BB%80%E4%B9%88"><span class="nav-number">1.15.2.</span> <span class="nav-text">常量池中有什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">1.15.3.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="nav-number">1.16.</span> <span class="nav-text">运行时常量池</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E4%BD%BF%E7%94%A8%E4%B8%BE%E4%BE%8B"><span class="nav-number">1.17.</span> <span class="nav-text">方法区使用举例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E6%BC%94%E8%BF%9B%E7%BB%86%E8%8A%82"><span class="nav-number">1.18.</span> <span class="nav-text">方法区的演进细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B0%B8%E4%B9%85%E4%BB%A3%E8%A6%81%E8%A2%AB%E5%85%83%E7%A9%BA%E9%97%B4%E6%9B%BF%E4%BB%A3%EF%BC%9F"><span class="nav-number">1.19.</span> <span class="nav-text">为什么永久代要被元空间替代？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#StringTable%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%B0%83%E6%95%B4%E4%BD%8D%E7%BD%AE"><span class="nav-number">1.20.</span> <span class="nav-text">StringTable为什么要调整位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E5%8F%98%E9%87%8F%E5%AD%98%E6%94%BE%E5%9C%A8%E9%82%A3%E9%87%8C%EF%BC%9F"><span class="nav-number">1.21.</span> <span class="nav-text">静态变量存放在那里？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="nav-number">1.22.</span> <span class="nav-text">方法区的垃圾回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.23.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="nav-number">1.24.</span> <span class="nav-text">常见面试题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E4%BA%BA%E7%90%86%E8%A7%A3"><span class="nav-number">1.25.</span> <span class="nav-text">个人理解</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Buffer"
+      src="/uploads/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Buffer</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lenonwang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2024/01/03/java-memory-collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【JVM之内存与垃圾回收篇】方法区 | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【JVM之内存与垃圾回收篇】方法区
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-04 00:11:22" itemprop="dateCreated datePublished" datetime="2024-01-04T00:11:22+08:00">2024-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">内存管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="/uploads/andrew-liu-2nx1Z70CT8I-unsplash.jpg" alt="avatar"></p>
+<h1>- Nemo&amp; - java内存模型篇</h1>
+<p>这次所讲述的是运行时数据区的最后一个部分</p>
+<p><img src="1542615-20200713213213903-1357712489.png" alt=""></p>
+<p>从线程共享与否的角度来看<br>
+<img src="1542615-20200713213219437-1252670091.png" alt=""></p>
+<p>ThreadLocal：如何保证多个线程在并发环境下的安全性？典型应用就是数据库连接管理，以及会话管理</p>
+<h2 id="栈、堆、方法区的交互关系">栈、堆、方法区的交互关系</h2>
+<p>下面就涉及了对象的访问定位<br>
+<img src="1542615-20200713213225285-1567727957.png" alt=""></p>
+<ul>
+<li>Person：存放在元空间，也可以说方法区</li>
+<li>person：存放在 Java 栈的局部变量表中</li>
+<li>new Person()：存放在 Java 堆中</li>
+</ul>
+<p>⠀</p>
+<h2 id="方法区的理解">方法区的理解</h2>
+<p>《Java 虚拟机规范》中明确说明：“尽管所有的方法区在逻辑上是属于堆的一部分，但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩。”但对于 HotSpotJVM 而言，方法区还有一个别名叫做 Non-Heap（非堆），目的就是要和堆分开。</p>
+<p>所以，<strong>方法区看作是一块独立于 Java 堆的内存空间。</strong></p>
+<p><img src="1542615-20200713213232981-1950057405.png" alt=""></p>
+<p>方法区主要存放的是 Class，而堆中主要存放的是 实例化的对象</p>
+<ul>
+<li>方法区（Method Area）与 Java 堆一样，是各个线程共享的内存区域。</li>
+<li>方法区在 JVM 启动的时候被创建，并且它的实际的物理内存空间中和 Java 堆区一样都可以是不连续的。</li>
+<li>方法区的大小，跟堆空间一样，可以选择固定大小或者可扩展。</li>
+<li>方法区的大小决定了系统可以保存多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出错误：java.lang.OutofMemoryError：<strong>PermGen space</strong> 或者 java.lang.OutOfMemoryError:<strong>Metaspace</strong>
+<ul>
+<li><strong>加载大量的第三方的 jar 包</strong></li>
+<li><strong>Tomcat 部署的工程过多（30~50 个）</strong></li>
+<li><strong>大量动态的生成反射类</strong></li>
+</ul>
+</li>
+<li>关闭 JVM 就会释放这个区域的内存。</li>
+</ul>
+<p>⠀</p>
+<h2 id="HotSpot中方法区的演进">HotSpot中方法区的演进</h2>
+<p>在 jdk7 及以前，习惯上把方法区，称为永久代。jdk8 开始，使用元空间取代了永久代。</p>
+<ul>
+<li>JDK 1.8 后，<strong>元空间</strong>存放在堆外内存（<strong>本地内存</strong>）中</li>
+</ul>
+<p>⠀<br>
+本质上，方法区和永久代并不等价。仅是对 hotspot 而言的。《Java 虚拟机规范》对如何实现方法区，不做统一要求。例如：BEAJRockit / IBM J9 中不存在永久代的概念。</p>
+<ul>
+<li>现在来看，当年使用永久代，不是好的 idea。导致 Java 程序更容易 OOM（超过 <code>-XX:MaxPermsize</code> 上限）</li>
+</ul>
+<p>⠀<br>
+<img src="1542615-20200713213244108-302140429.png" alt=""></p>
+<p>而到了 JDK8，终于完全废弃了永久代的概念，改用与 JRockit、J9 一样在本地内存中实现的元空间（Metaspace）来代替</p>
+<p><img src="1542615-20200713213249908-1084189353.png" alt=""></p>
+<p>元空间的本质和永久代类似，都是对JVM规范中方法区的实现。不过元空间与永久代最大的区别在于：<strong>元空间不在虚拟机设置的内存中，而是使用本地内存</strong></p>
+<p>永久代、元空间二者并不只是名字变了，内部结构也调整了</p>
+<p>根据《Java 虚拟机规范》的规定，如果方法区无法满足新的内存分配需求时，将抛出 OOM 异常</p>
+<h2 id="设置方法区大小与-OOM">设置方法区大小与 OOM</h2>
+<p>方法区的大小不必是固定的，JVM 可以根据应用的需要动态调整。</p>
+<h2 id="jdk7及以前">jdk7及以前</h2>
+<ul>
+<li>通过 <code>-XX:Permsize</code> 来设置永久代初始分配空间。默认值是 20.75M</li>
+<li><code>-XX:MaxPermsize</code> 来设定永久代最大可分配空间。32 位机器默认是 64M，64 位机器模式是 82M</li>
+<li>当 JVM 加载的类信息容量超过了这个值，会报异常 OutOfMemoryError:PermGen space。</li>
+</ul>
+<p>⠀<br>
+<img src="1542615-20200713213256534-1081297873.png" alt=""></p>
+<h2 id="JDK8以后">JDK8以后</h2>
+<ul>
+<li>
+<p>元数据区大小可以使用参数 <code>-XX:MetaspaceSize</code> 和 <code>-XX:MaxMetaspaceSize</code> 指定，替代上述原有的两个参数。</p>
+</li>
+<li>
+<p>默认值依赖于平台。<strong>Windows 下，<code>-XX:MetaspaceSize</code> 是 21M，<code>-XX:MaxMetaspaceSize</code>的值是 -1，即没有限制。</strong></p>
+</li>
+<li>
+<p>与永久代不同，如果不指定大小，默认情况下，虚拟机会耗尽所有的可用系统内存。如果元数据区发生溢出，虚拟机一样会抛出异常 OutOfMemoryError:Metaspace</p>
+</li>
+<li>
+<p><code>-XX:MetaspaceSize</code>：设置初始的元空间大小。对于一个 64 位的服务器端 JVM 来说，其默认的 <code>-XX:MetaspaceSize</code> 值为 21MB。这就是初始的高水位线，一旦触及这个水位线，FullGC 将会被触发并卸载没用的类（即这些类对应的类加载器不再存活）然后这个高水位线将会重置。新的高水位线的值取决于 GC 后释放了多少元空间。如果释放的空间不足，那么在不超过 MaxMetaspaceSize 时，适当提高该值。如果释放空间过多，则适当降低该值。</p>
+</li>
+<li>
+<p>如果初始化的高水位线设置过低，上述高水位线调整情况会发生很多次。通过垃圾回收器的日志可以观察到 FullGC 多次调用。为了避免频繁地 GC，建议将 <code>-XX:MetaspaceSize</code> 设置为一个相对较高的值。</p>
+</li>
+</ul>
+<p>⠀</p>
+<h2 id="如何解决这些OOM">如何解决这些OOM</h2>
+<ul>
+<li>
+<p>要解决 OOM 异常或 heap space 的异常，一般的手段是首先通过内存映像分析工具（如 Eclipse Memory Analyzer）对 dump 出来的堆转储快照进行分析，重点是确认内存中的对象是否是必要的，也就是要先分清楚到底是出现了内存泄漏（Memory Leak）还是内存溢出（Memory Overflow）</p>
+<ul>
+<li>内存泄漏就是 有大量的引用指向某些对象，但是这些对象以后不会使用了，但是因为它们还和 GC ROOT 有关联，所以导致以后这些对象也不会被回收，这就是内存泄漏的问题</li>
+</ul>
+</li>
+<li>
+<p>如果是内存泄漏，可进一步通过工具查看泄漏对象到 GC Roots 的引用链。于是就能找到泄漏对象是通过怎样的路径与 GCRoots 相关联并导致垃圾收集器无法自动回收它们的。掌握了泄漏对象的类型信息，以及 GCRoots 引用链的信息，就可以比较准确地定位出泄漏代码的位置。</p>
+</li>
+<li>
+<p>如果不存在内存泄漏，换句话说就是内存中的对象确实都还必须存活着，那就应当检查虚拟机的堆参数（-Xmx 与 -Xms），与机器物理内存对比看是否还可以调大，从代码上检查是否存在某些对象生命周期过长、持有状态时间过长的情况，尝试减少程序运行期的内存消耗。</p>
+</li>
+</ul>
+<p>⠀</p>
+<h2 id="方法区的内部结构">方法区的内部结构</h2>
+<p><img src="1542615-20200713213305819-860183824.png" alt=""></p>
+<p>《深入理解 Java 虚拟机》书中对方法区（Method Area）存储内容描述如下：它用于存储已被虚拟机加载的<strong>类型信息、常量、静态变量、即时编译器编译后的代码缓存</strong>等。</p>
+<p><img src="1542615-20200713213312363-1838469801.png" alt=""></p>
+<h2 id="类型信息">类型信息</h2>
+<p>对每个加载的类型（类 class、接口 interface、枚举 enum、注解 annotation），JVM 必须在方法区中存储以下类型信息：</p>
+<ul>
+<li>这个类型的完整有效名称（全名=包名.类名）</li>
+<li>这个类型直接父类的完整有效名（对于 interface 或是 java.lang.object，都没有父类）</li>
+<li>这个类型的修饰符（public，abstract，final 的某个子集）</li>
+<li>这个类型直接接口的一个有序列表</li>
+</ul>
+<p>⠀</p>
+<h2 id="域-Field-信息">域(Field)信息</h2>
+<p>JVM 必须在方法区中保存类型的所有域的相关信息以及域的声明顺序。</p>
+<p>域的相关信息包括：域名称、域类型、域修饰符（public，private，protected，static，final，volatile，transient 的某个子集）</p>
+<h2 id="方法（Method）信息">方法（Method）信息</h2>
+<p>JVM 必须保存所有方法的以下信息，同域信息一样包括声明顺序：</p>
+<ul>
+<li>方法名称</li>
+<li>方法的返回类型（或 void）</li>
+<li>方法参数的数量和类型（按顺序）</li>
+<li>方法的修饰符（public，private，protected，static，final，synchronized，native，abstract 的一个子集）</li>
+<li>方法的字节码（bytecodes）、操作数栈、局部变量表及大小（abstract 和 native 方法除外）</li>
+<li>异常表（abstract 和 native 方法除外）</li>
+</ul>
+<p>⠀</p>
+<blockquote>
+<p>每个异常处理的开始位置、结束位置、代码处理在程序计数器中的偏移地址、被捕获的异常类的常量池索引</p>
+</blockquote>
+<h2 id="non-final的类变量">non-final的类变量</h2>
+<p>静态变量和类关联在一起，随着类的加载而加载，他们成为类数据在逻辑上的一部分</p>
+<p>类变量被类的所有实例共享，即使没有类实例时，你也可以访问它</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * non-final的类变量</span><br><span class="line"> *</span><br><span class="line"> * @author: Nemo</span><br><span class="line"> */</span><br><span class="line">public class MethodAreaTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Order order = new Order();</span><br><span class="line">        order.hello();</span><br><span class="line">        System.out.println(order.count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Order &#123;</span><br><span class="line">    public static int count = 1;</span><br><span class="line">    public static final int number = 2;</span><br><span class="line">    public static void hello() &#123;</span><br><span class="line">        System.out.println(&quot;hello!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上代码所示，即使我们把 order 设置为 null，也不会出现空指针异常</p>
+<h2 id="全局常量">全局常量</h2>
+<p>全局常量就是使用 static final 进行修饰</p>
+<p>被声明为 final 的类变量的处理方法则不同，每个全局常量在编译的时候就会被分配了。</p>
+<h2 id="运行时常量池-VS-常量池">运行时常量池 VS 常量池</h2>
+<p>运行时常量池，就是运行时常量池</p>
+<p><img src="1542615-20200713213324512-711283315.png" alt=""></p>
+<h2 id="常量池">常量池</h2>
+<p><img src="1542615-20200713213330565-987936858.png" alt=""></p>
+<p>一个有效的字节码文件中除了包含类的版本信息、字段、方法以及接口等描述符信息外，还包含一项信息就是常量池表（Constant Pool Table），包括各种字面量和对类型、域和方法的符号引用</p>
+<h3 id="为什么需要常量池">为什么需要常量池</h3>
+<p>一个 java 源文件中的类、接口，编译后产生一个字节码文件。而 Java 中的字节码需要数据支持，通常这种数据会很大以至于不能直接存到字节码里，换另一种方式，可以存到常量池，这个字节码包含了指向常量池的引用。在动态链接的时候会用到运行时常量池，之前有介绍。</p>
+<p>比如：如下的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class SimpleClass &#123;</span><br><span class="line">    public void sayHello() &#123;</span><br><span class="line">        System.out.println(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然上述代码只有 194 字节，但是里面却使用了 String、System、PrintStream 及 Object 等结构。这里的代码量其实很少了，如果代码多的话，引用的结构将会更多，这里就需要用到常量池了。</p>
+<h3 id="常量池中有什么">常量池中有什么</h3>
+<p>例如下面这段代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MethodAreaTest2 &#123;</span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        Object obj = new Object();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将会被翻译成如下字节码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new #2  </span><br><span class="line">dup</span><br><span class="line">invokespecial</span><br></pre></td></tr></table></figure>
+<h3 id="小结">小结</h3>
+<p>常量池、可以看做是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等类型</p>
+<h2 id="运行时常量池">运行时常量池</h2>
+<p>运行时常量池（Runtime Constant Pool）是方法区的一部分。</p>
+<p>常量池表（Constant Pool Table）是 Class 文件的一部分，<strong>用于存放编译期生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。</strong></p>
+<p>运行时常量池，在加载类和接口到虚拟机后，就会创建对应的运行时常量池。</p>
+<p>JVM 为每个已加载的类型（类或接口）都维护一个常量池。池中的数据项像数组项一样，是通过<strong>索引访问</strong>的。</p>
+<p>运行时常量池中包含多种不同的常量，包括编译期就已经明确的数值字面量，也包括到运行期解析后才能够获得的方法或者字段引用。此时不再是常量池中的符号地址了，这里换为真实地址。</p>
+<ul>
+<li>运行时常量池，相对于 Class 文件常量池的另一重要特征是：<strong>具备动态性。</strong></li>
+<li><code>String.intern()</code></li>
+</ul>
+<p>⠀<br>
+运行时常量池类似于传统编程语言中的符号表（symboltable），但是它所包含的数据却比符号表要更加丰富一些。</p>
+<p>当创建类或接口的运行时常量池时，如果构造运行时常量池所需的内存空间超过了方法区所能提供的最大值，则 JVM 会抛 OutOfMemoryError 异常。</p>
+<h2 id="方法区使用举例">方法区使用举例</h2>
+<p>如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class MethodAreaDemo &#123;</span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        int x = 500;</span><br><span class="line">        int y = 100;</span><br><span class="line">        int a = x / y;</span><br><span class="line">        int b = 50;</span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>字节码执行过程展示</p>
+<p><img src="1542615-20200713213348107-1377674924.png" alt=""></p>
+<p>首先现将操作数500放入到操作数栈中</p>
+<p><img src="1542615-20200713213354970-1212597160.png" alt=""></p>
+<p>然后存储到局部变量表中</p>
+<p><img src="1542615-20200713213359099-483522965.png" alt=""></p>
+<p>然后重复一次，把 100 放入局部变量表中，最后再将变量表中的 500 和 100 取出，进行操作</p>
+<p><img src="1542615-20200713213404744-285710312.png" alt=""></p>
+<p>将 500 和 100 进行一个除法运算，在把结果入栈</p>
+<p><img src="1542615-20200713213412154-410049567.png" alt=""></p>
+<p>在最后就是输出流，需要调用运行时常量池的常量</p>
+<p><img src="1542615-20200713213418030-1870134246.png" alt=""></p>
+<p>最后调用 invokevirtual（虚方法调用），然后返回</p>
+<p><img src="1542615-20200713213423379-1369605517.png" alt=""></p>
+<p>返回时</p>
+<p><img src="1542615-20200713213428582-1126679088.png" alt=""></p>
+<p>程序计数器始终计算的都是当前代码运行的位置，目的是为了方便记录方法调用后能够正常返回，或者是进行了 CPU 切换后，也能回来到原来的代码进行执行。</p>
+<h2 id="方法区的演进细节">方法区的演进细节</h2>
+<p>首先明确：只有 Hotspot 才有永久代。BEA JRockit、IBMJ9 等来说，是不存在永久代的概念的。原则上如何实现方法区属于虚拟机实现细节，不受《Java 虚拟机规范》管束，并不要求统一</p>
+<p>Hotspot 中方法区的变化：</p>
+<table>
+<thead>
+<tr>
+<th>JDK 版本</th>
+<th>方法区的变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JDK1.6 及以前</td>
+<td>有永久代，静态变量存储在永久代上</td>
+</tr>
+<tr>
+<td>JDK1.7</td>
+<td>有永久代，但已经逐步“去永久代”，字符串常量池，静态变量移除，保存在堆中</td>
+</tr>
+<tr>
+<td>JDK1.8</td>
+<td>无永久代，类型信息，字段，方法，常量保存在本地内存的元空间，但字符串常量池、静态变量仍然在堆中。</td>
+</tr>
+<tr>
+<td>JDK6 的时候</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><img src="1542615-20200713213436180-896344092.png" alt=""></p>
+<p>JDK7 的时候</p>
+<p><img src="1542615-20200713213441766-2133918021.png" alt=""></p>
+<p>JDK8 的时候，元空间大小只受物理内存影响</p>
+<p><img src="1542615-20200713213448897-153651410.png" alt=""></p>
+<h2 id="为什么永久代要被元空间替代？">为什么永久代要被元空间替代？</h2>
+<p>官方解释：<a target="_blank" rel="noopener" href="http://openjdk.java.net/jeps/122">http://openjdk.java.net/jeps/122</a></p>
+<p>JRockit 是和 HotSpot 融合后的结果，因为 JRockit 没有永久代，所以他们不需要配置永久代</p>
+<p>随着 Java8 的到来，HotSpot VM 中再也见不到永久代了。但是这并不意味着类的元数据信息也消失了。这些数据被移到了一个<strong>与堆不相连的本地内存区域，这个区域叫做元空间（Metaspace）。</strong></p>
+<p>由于类的元数据分配在本地内存中，元空间的最大可分配空间就是系统可用内存空间，这项改动是很有必要的，原因有：</p>
+<ul>
+<li>
+<p>为永久代设置空间大小是很难确定的。 在某些场景下，如果动态加载类过多，容易产生 Perm 区的 OOM。比如某个实际 Web 工 程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现致命错误。 “Exception in thread‘dubbo client x.x connector’java.lang.OutOfMemoryError:PermGen space” 而元空间和永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。</p>
+</li>
+<li>
+<p>因此，默认情况下，元空间的大小仅受本地内存限制。</p>
+</li>
+<li>
+<p>对永久代进行调优是很困难的。</p>
+</li>
+</ul>
+<p>⠀<br>
+有些人认为方法区（如 HotSpot 虚拟机中的元空间或者永久代）是没有垃圾收集行为的，其实不然。《Java 虚拟机规范》对方法区的约束是非常宽松的，提到过可以不要求虚拟机在方法区中实现垃圾收集。事实上也确实有未实现或未能完整实现方法区类型卸载的收集器存在（如 JDK11 时期的 ZGC 收集器就不支持类卸载）。一般来说这个区域的回收效果比较难令人满意，尤其是类型的卸载，条件相当苛刻。但是这部分区域的回收有时又确实是必要的。以前 sun 公司的 Bug 列表中，曾出现过的若干个严重的 Bug 就是由于低版本的 HotSpot 虚拟机对此区域未完全回收而导致内存泄漏</p>
+<p>方法区的垃圾收集主要回收两部分内容：常量池中废弃的常量和不在使用的类型</p>
+<h2 id="StringTable为什么要调整位置">StringTable为什么要调整位置</h2>
+<p>jdk7 中将 StringTable 放到了堆空间中。因为永久代的回收效率很低，在 full gc 的时候才会触发。而 full gc 是老年代的空间不足、永久代不足时才会触发。这就导致 stringTable 回收效率不高。而我们开发中会有大量的字符串被创建，回收效率低，导致永久代内存不足。放到堆里，能及时回收内存。</p>
+<h2 id="静态变量存放在那里？">静态变量存放在那里？</h2>
+<p>静态引用对应的对象实体始终都存在堆空间</p>
+<p>可以使用 jhsdb.ext，需要在 jdk9 的时候才引入的</p>
+<p>staticObj 随着 Test 的类型信息存放在方法区，instanceObj 随着 Test 的对象实例存放在 Java 堆，localObject 则是存放在 foo() 方法栈帧的局部变量表中。</p>
+<p><img src="1542615-20200713213516630-1510588738.png" alt=""></p>
+<p>测试发现：三个对象的数据在内存中的地址都落在 Eden 区范围内。所以结论：只要是对象实例必然会在 Java 堆中分配。</p>
+<p>接着，找到了一个引用该 staticobj 对象的地方，是在一个 java.lang.Class 的实例里，并且给出了这个实例的地址，通过 Inspector 查看该对象实例，可以清楚看到这确实是一个 java.lang.Class 类型的对象实例，里面有一个名为 staticobj 的实例字段：</p>
+<p><img src="1542615-20200713213522166-615927757.png" alt=""></p>
+<p>从《Java 虚拟机规范》所定义的概念模型来看，所有 Class 相关的信息都应该存放在方法区之中，但方法区该如何实现，《Java 虚拟机规范》并未做出规定，这就成了一件允许不同虚拟机自己灵活把握的事情。JDK7 及其以后版本的 HotSpot 虚拟机选择把静态变量与类型在 Java 语言一端的映射class对象存放在一起，存储于 Java 堆之中，从我们的实验中也明确验证了这一点</p>
+<h2 id="方法区的垃圾回收">方法区的垃圾回收</h2>
+<p>有些人认为方法区（如 Hotspot 虚拟机中的元空间或者永久代）是没有垃圾收集行为的，其实不然。《Java 虚拟机规范》对方法区的约束是非常宽松的，提到过可以不要求虚拟机在方法区中实现垃圾收集。事实上也确实有未实现或未能完整实现方法区类型卸载的收集器存在（如 JDK11 时期的 ZGC 收集器就不支持类卸载）。</p>
+<p>一般来说<strong>这个区域的回收效果比较难令人满意，尤其是类型的卸载，条件相当苛刻。<strong>但是这部分区域的回收</strong>有时又确实是必要的</strong>。以前 sun 公司的 Bug 列表中，曾出现过的若干个严重的 Bug 就是由于低版本的 HotSpot 虚拟机对此区域未完全回收而导致内存泄漏。</p>
+<p><strong>方法区的垃圾收集主要回收两部分内容：常量池中废弃的常量和不再使用的类型。</strong></p>
+<p>先来说说方法区内常量池之中主要存放的两大类常量：字面量和符号引用。字面量比较接近 Java 语言层次的常量概念，如文本字符串、被声明为 final 的常量值等。而符号引用则属于编译原理方面的概念，包括下面三类常量：</p>
+<ul>
+<li>类和接口的全限定名</li>
+<li>字段的名称和描述符</li>
+<li>方法的名称和描述符</li>
+</ul>
+<p>⠀<br>
+HotSpot 虚拟机对常量池的回收策略是很明确的，<strong>只要常量池中的常量没有被任何地方引用，就可以被回收。</strong></p>
+<p>回收废弃常量与回收 Java 堆中的对象非常类似。（关于常量的回收比较简单，重点是类的回收）</p>
+<p>判定一个常量是否“废弃”还是相对简单，而要判定一个类型是否属于“不再被使用的类”的条件就比较苛刻了。需要同时满足下面三个条件：</p>
+<ul>
+<li>该类所有的实例都已经被回收，也就是 Java 堆中不存在该类及其任何派生子类的实例。</li>
+<li>加载该类的类加载器已经被回收，这个条件除非是经过精心设计的可替换类加载器的场景，如 OSGi、JSP 的重加载等，否则通常是很难达成的。</li>
+<li>该类对应的 java.lang.Class 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+<p>⠀<br>
+Java 虚拟机被允许对满足上述三个条件的无用类进行回收，这里说的仅仅是“被允许”，而并不是和对象一样，没有引用了就必然会回收。关于是否要对类型进行回收，HotSpot 虚拟机提供了 <code>-Xnoclassgc</code> 参数进行控制，还可以使用 <code>-verbose:class</code> 以及 <code>-XX：+TraceClass-Loading</code>、<code>-XX：+TraceClassUnLoading</code> 查看类加载和卸载信息</p>
+<p>在大量使用反射、动态代理、CGLib等字节码框架，动态生成 JSP 以及 oSGi 这类频繁自定义类加载器的场景中，<strong>通常都需要 Java 虚拟机具备类型卸载的能力，以保证不会对方法区造成过大的内存压力。</strong></p>
+<h2 id="总结">总结</h2>
+<p><img src="1542615-20200713213530555-2123448191.png" alt=""></p>
+<h2 id="常见面试题">常见面试题</h2>
+<p><strong>百度</strong><br>
+三面：说一下 JVM 内存模型吧，有哪些区？分别干什么的？</p>
+<p><strong>蚂蚁金服：</strong> Java8 的内存分代改进 JVM 内存分哪几个区，每个区的作用是什么？ 一面：JVM 内存分布/内存结构？栈和堆的区别？堆的结构？为什么两个 survivor 区？</p>
+<p>二面：Eden 和 survior 的比例分配</p>
+<p><strong>小米：</strong><br>
+jvm 内存分区，为什么要有新生代和老年代</p>
+<p><strong>字节跳动：</strong> 二面：Java 的内存分区 二面：讲讲 jvm 运行时数据库区</p>
+<p>什么时候对象会进入老年代？</p>
+<p><strong>京东：</strong> JVM 的内存结构，Eden 和 Survivor 比例。</p>
+<p>JVM 内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为 Eden 和 survivor。</p>
+<p><strong>天猫：</strong> 一面：JVM 内存模型以及分区，需要详细到每个区放什么。</p>
+<p>一面：JVM 的内存模型，Java8 做了什么改</p>
+<p><strong>拼多多：</strong><br>
+JVM 内存分哪几个区，每个区的作用是什么？</p>
+<p><strong>美团：</strong> java 内存分配 jvm 的永久代中会发生垃圾回收吗？</p>
+<p>一面：jvm 内存分区，为什么要有新生代和老年代？</p>
+<h2 id="个人理解">个人理解</h2>
+<p>元空间中的元其实跟元数据中的元是一个概念，都是描述的自身本身的基本结构属性。如 元空间中存储的是.class文件(描述类的结构属性) ，元数据中存的是描述结果集的自身结构属性信息(这里用jdbc中的结果集元数据来举例)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="tag"># 内存模型</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/29/StarXm%E5%AE%89%E8%A3%85%E4%B8%8E%E7%A0%B4%E8%A7%A3/" rel="prev" title="Staruml安装与破解，纯净方法(Mac版)">
+                  <i class="fa fa-chevron-left"></i> Staruml安装与破解，纯净方法(Mac版)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/19/%E7%BE%A4%E6%99%96OPT%E6%97%A0%E6%B3%95%E9%AA%8C%E8%AF%81%E4%B9%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" rel="next" title="群晖OPT无法验证之解决方法">
+                  群晖OPT无法验证之解决方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Buffer</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

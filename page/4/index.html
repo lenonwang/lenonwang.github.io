@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lenonwang.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="程序猿">
+<meta property="og:url" content="https://lenonwang.github.io/page/4/index.html">
+<meta property="og:site_name" content="程序猿">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Buffer">
+<meta property="article:tag" content="“技术分享，计算机网络，自动化测试，python，Java，机器学习”">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lenonwang.github.io/page/4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/4/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>程序猿</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">程序猿</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Half as much, twice as elegant.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Buffer"
+      src="/uploads/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Buffer</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lenonwang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/02/24/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93Glide%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/02/24/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93Glide%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">图片加载库Glide介绍</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-02-24 10:50:54" itemprop="dateCreated datePublished" datetime="2018-02-24T10:50:54+08:00">2018-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">第三方框架</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>英文原文 Introduction to Glide, Image Loader Library for Android, recommended by Google<br>
+摘录来自：Google推荐的图片加载库Glide介绍</p>
+</blockquote>
+<p>在泰国举行的谷歌开发者论坛上，谷歌为我们介绍了一个名叫 Glide 的图片加载库，作者是bumptech。这个库被广泛的运用在google的开源项目中，包括2014年google I/O大会上发布的官方app。它的成功让我非常感兴趣。我花了一整晚的时间把玩，决定分享一些自己的经验。在开始之前我想说，Glide和Picasso有90%的相似度，准确的说，就是Picasso的克隆版本。但是在细节上还是有不少区别的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/02/24/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD%E5%BA%93Glide%E4%BB%8B%E7%BB%8D/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/19/Android%E9%85%8D%E7%BD%AE%E6%9E%84%E5%BB%BA%E5%8F%98%E4%BD%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/19/Android%E9%85%8D%E7%BD%AE%E6%9E%84%E5%BB%BA%E5%8F%98%E4%BD%93/" class="post-title-link" itemprop="url">Android配置构建变体</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-19 15:41:16" itemprop="dateCreated datePublished" datetime="2018-01-19T15:41:16+08:00">2018-01-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/19/Android%E9%85%8D%E7%BD%AE%E6%9E%84%E5%BB%BA%E5%8F%98%E4%BD%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/17/Android%E5%AE%9E%E7%8E%B0%E7%94%BB%E5%B8%83%E6%96%87%E5%AD%97%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/17/Android%E5%AE%9E%E7%8E%B0%E7%94%BB%E5%B8%83%E6%96%87%E5%AD%97%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C/" class="post-title-link" itemprop="url">Android实现画布文字自动换行</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-17 19:02:30" itemprop="dateCreated datePublished" datetime="2018-01-17T19:02:30+08:00">2018-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>StaticLayout作为新的布局用于实现画布文字自动换行的功能。StaticLayout is a Layout for text that will not be edited after it is laid out. Use DynamicLayout for text that may change.This is used by widgets to control text layout. You should not need to use this class directly unless you are implementing your own widget or custom display object, or would be tempted to call Canvas.drawText() directly.<br>
+<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/text/StaticLayout.html"></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/17/%E4%BD%BF%E7%94%A8merge%E4%BB%A3%E6%9B%BFFrameLayout%E5%B5%8C%E5%A5%97%E5%B1%82%E6%AC%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/17/%E4%BD%BF%E7%94%A8merge%E4%BB%A3%E6%9B%BFFrameLayout%E5%B5%8C%E5%A5%97%E5%B1%82%E6%AC%A1/" class="post-title-link" itemprop="url">使用merge代替FrameLayout嵌套层次</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-17 18:03:05" itemprop="dateCreated datePublished" datetime="2018-01-17T18:03:05+08:00">2018-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Android开发中可以使用merge来取代Framelayout从而达到减少嵌套层次的问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;FrameLayout&gt;</span><br><span class="line">    include layout2</span><br><span class="line">&lt;/FrameLayout&gt;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/17/%E4%BD%BF%E7%94%A8merge%E4%BB%A3%E6%9B%BFFrameLayout%E5%B5%8C%E5%A5%97%E5%B1%82%E6%AC%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/11/https%E4%B8%8Ehttp%E5%86%85%E5%AE%B9%E6%B7%B7%E5%90%88%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/11/https%E4%B8%8Ehttp%E5%86%85%E5%AE%B9%E6%B7%B7%E5%90%88%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Android5.0及以上版本——WebView中https与http内容混合问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-11 14:52:50" itemprop="dateCreated datePublished" datetime="2018-01-11T14:52:50+08:00">2018-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="场景复现">场景复现</h3>
+<p>在Android5.0 以及以上的系统，当WebView加载的链接为Https开头，但是链接里面的内容，比如图片为Http链接，这时候，图片就会加载不出来，在浏览器中的Console会有如下警告log:</p>
+<h3 id="原因">原因</h3>
+<p>从Android5.0开始，WebView默认不支持同时加载Https和Http混合模式。</p>
+<h3 id="官方说明">官方说明</h3>
+<p>从Android5.0以后，当一个安全的站点（https）去加载一个非安全的站点（http）时，需要配置Webview加载内容的混合模式，一共有如下三种模式：</p>
+<ul>
+<li>MIXED_CONTENT_NEVER_ALLOW：Webview不允许一个安全的站点（https）去加载非安全的站点内容（http）,比如，https网页内容的图片是http链接。强烈建议App使用这种模式，因为这样更安全。</li>
+<li>MIXED_CONTENT_ALWAYS_ALLOW：在这种模式下，WebView是可以在一个安全的站点（Https）里加载非安全的站点内容（Http）,这是WebView最不安全的操作模式，尽可能地不要使用这种模式。</li>
+<li>MIXED_CONTENT_COMPATIBILITY_MODE：在这种模式下，当涉及到混合式内容时，WebView会尝试去兼容最新Web浏览器的风格。一些不安全的内容（Http）能被加载到一个安全的站点上（Https），而其他类型的内容将会被阻塞。这些内容的类型是被允许加载还是被阻塞可能会随着版本的不同而改变，并没有明确的定义。这种模式主要用于在App里面不能控制内容的渲染，但是又希望在一个安全的环境下运行。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/11/https%E4%B8%8Ehttp%E5%86%85%E5%AE%B9%E6%B7%B7%E5%90%88%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/11/Android%E9%9A%90%E5%BC%8F%E5%90%AF%E5%8A%A8Activity%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/11/Android%E9%9A%90%E5%BC%8F%E5%90%AF%E5%8A%A8Activity%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Android隐式启动Activity问题总结</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-11 14:12:39" itemprop="dateCreated datePublished" datetime="2018-01-11T14:12:39+08:00">2018-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <blockquote>
+<p>最近，我在从事开发支付sdk的工程中，为了实现抽象Activity的继承使用同时又能够实现业务APP调用抽象Activity，使用隐式调用activity的实现。</p>
+</blockquote>
+<p>就上述实现的方式来讲很简单，但是，Activity采用了隐式调用会产生一个问题，就是使用同名Action注册的子类Activity在其他进程中同样的响应这个隐式的Intent的调用。简单的说，就是我在某一个App中使用了我的sdk，然后需要支付的时候，点击支付唤起支付列表页面，但是，其他的APP中同样也是使用了我的sdk，注册了同名action的子Activity，同样响应这个action的Intent。可以想象这样的效果，很糟糕的！因为我决定把这个Action交给业务APP自己去设置，同时自行在AndroidManifest.xml文件中进行注册，并且，注册的名字要求必须是唯一的，这样就避免了其他进程中的支付列表响应当前使用的APP中Intent的调起。</p>
+<p>隐式调用跟显示调用的差别就在于一个是显示的制定了目的Activity，而一个又是没有明确的指定目的Activity，写在这里用来做提醒，希望下次使用隐式调用能够避免这个问题的发生，不要再犯这种低级的错误。错误是低级的，但是问题是巨大的，谁也不想自己的APP莫名其妙调用了其他的APP的activity是吧！</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/10/Pos%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92%E4%B9%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/10/Pos%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92%E4%B9%A6/" class="post-title-link" itemprop="url">Pos项目计划书</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-10 11:53:36" itemprop="dateCreated datePublished" datetime="2018-01-10T11:53:36+08:00">2018-01-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/10/Pos%E9%A1%B9%E7%9B%AE%E8%AE%A1%E5%88%92%E4%B9%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/09/Git%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/09/Git%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" class="post-title-link" itemprop="url">Git命令大全</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-09 16:33:26" itemprop="dateCreated datePublished" datetime="2018-01-09T16:33:26+08:00">2018-01-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><img src="/uploads/andrew-liu-2nx1Z70CT8I-unsplash.jpg" alt="avatar"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">git init                                                  <span class="comment"># 初始化本地git仓库（创建新仓库）</span></span><br><span class="line">git config --global user.name <span class="string">&quot;xxx&quot;</span>                       <span class="comment"># 配置用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxx@xxx.com&quot;</span>              <span class="comment"># 配置邮件</span></span><br><span class="line">git config --global color.ui <span class="literal">true</span>                         <span class="comment"># git status等命令自动着色</span></span><br><span class="line">git config --global color.status auto</span><br><span class="line">git config --global color.diff auto</span><br><span class="line">git config --global color.branch auto</span><br><span class="line">git config --global color.interactive auto</span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy                    <span class="comment"># remove  proxy configuration on git</span></span><br><span class="line">git <span class="built_in">clone</span> git+ssh://git@192.168.53.168/VT.git             <span class="comment"># clone远程仓库</span></span><br><span class="line">git status                                                <span class="comment"># 查看当前版本状态（是否修改）</span></span><br><span class="line">git add xyz                                               <span class="comment"># 添加xyz文件至index</span></span><br><span class="line">git add .                                                 <span class="comment"># 增加当前子目录下所有更改过的文件至index</span></span><br><span class="line">git commit -m <span class="string">&#x27;xxx&#x27;</span>                                       <span class="comment"># 提交</span></span><br><span class="line">git commit --amend -m <span class="string">&#x27;xxx&#x27;</span>                               <span class="comment"># 合并上一次提交（用于反复修改）</span></span><br><span class="line">git commit -am <span class="string">&#x27;xxx&#x27;</span>                                      <span class="comment"># 将add和commit合为一步</span></span><br><span class="line">git <span class="built_in">rm</span> xxx                                                <span class="comment"># 删除index中的文件</span></span><br><span class="line">git <span class="built_in">rm</span> -r *                                               <span class="comment"># 递归删除</span></span><br><span class="line">git <span class="built_in">log</span>                                                   <span class="comment"># 显示提交日志</span></span><br><span class="line">git <span class="built_in">log</span> -1                                                <span class="comment"># 显示1行日志 -n为n行</span></span><br><span class="line">git <span class="built_in">log</span> -5</span><br><span class="line">git <span class="built_in">log</span> --<span class="built_in">stat</span>                                            <span class="comment"># 显示提交日志及相关变动文件</span></span><br><span class="line">git <span class="built_in">log</span> -p -m</span><br><span class="line">git show dfb02e6e4f2f7b573337763e5c0013802e392818         <span class="comment"># 显示某个提交的详细内容</span></span><br><span class="line">git show dfb02                                            <span class="comment"># 可只用commitid的前几位</span></span><br><span class="line">git show HEAD                                             <span class="comment"># 显示HEAD提交日志</span></span><br><span class="line">git show HEAD^                                            <span class="comment"># 显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</span></span><br><span class="line">git tag                                                   <span class="comment"># 显示已存在的tag</span></span><br><span class="line">git tag -a v2.0 -m <span class="string">&#x27;xxx&#x27;</span>                                  <span class="comment"># 增加v2.0的tag</span></span><br><span class="line">git show v2.0                                             <span class="comment"># 显示v2.0的日志及详细内容</span></span><br><span class="line">git <span class="built_in">log</span> v2.0                                              <span class="comment"># 显示v2.0的日志</span></span><br><span class="line">git diff                                                  <span class="comment"># 显示所有未添加至index的变更</span></span><br><span class="line">git diff --cached                                         <span class="comment"># 显示所有已添加index但还未commit的变更</span></span><br><span class="line">git diff HEAD^                                            <span class="comment"># 比较与上一个版本的差异</span></span><br><span class="line">git diff HEAD -- ./lib                                    <span class="comment"># 比较与HEAD版本lib目录的差异</span></span><br><span class="line">git diff origin/master..master                            <span class="comment"># 比较远程分支master上有本地分支master上没有的</span></span><br><span class="line">git diff origin/master..master --<span class="built_in">stat</span>                     <span class="comment"># 只显示差异的文件，不显示具体内容</span></span><br><span class="line">git remote add origin git+ssh://git@192.168.53.168/VT.git <span class="comment"># 增加远程定义（用于push/pull/fetch）</span></span><br><span class="line">git branch                                                <span class="comment"># 显示本地分支</span></span><br><span class="line">git branch --contains 50089                               <span class="comment"># 显示包含提交50089的分支</span></span><br><span class="line">git branch -a                                             <span class="comment"># 显示所有分支</span></span><br><span class="line">git branch -r                                             <span class="comment"># 显示所有原创分支</span></span><br><span class="line">git branch --merged                                       <span class="comment"># 显示所有已合并到当前分支的分支</span></span><br><span class="line">git branch --no-merged                                    <span class="comment"># 显示所有未合并到当前分支的分支</span></span><br><span class="line">git branch -m master master_copy                          <span class="comment"># 本地分支改名</span></span><br><span class="line">git checkout -b master_copy                               <span class="comment"># 从当前分支创建新分支master_copy并检出</span></span><br><span class="line">git checkout -b master master_copy                        <span class="comment"># 上面的完整版</span></span><br><span class="line">git checkout features/performance                         <span class="comment"># 检出已存在的features/performance分支</span></span><br><span class="line">git checkout --track hotfixes/BJVEP933                    <span class="comment"># 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支</span></span><br><span class="line">git checkout v2.0                                         <span class="comment"># 检出版本v2.0</span></span><br><span class="line">git checkout -b devel origin/develop                      <span class="comment"># 从远程分支develop创建新本地分支devel并检出</span></span><br><span class="line">git checkout -- README                                    <span class="comment"># 检出head版本的README文件（可用于修改错误回退）</span></span><br><span class="line">git merge origin/master                                   <span class="comment"># 合并远程master分支至当前分支</span></span><br><span class="line">git cherry-pick ff44785404a8e                             <span class="comment"># 合并提交ff44785404a8e的修改</span></span><br><span class="line">git push origin master                                    <span class="comment"># 将当前分支push到远程master分支</span></span><br><span class="line">git push origin :hotfixes/BJVEP933                        <span class="comment"># 删除远程仓库的hotfixes/BJVEP933分支</span></span><br><span class="line">git push --tags                                           <span class="comment"># 把所有tag推送到远程仓库</span></span><br><span class="line">git fetch                                                 <span class="comment"># 获取所有远程分支（不更新本地分支，另需merge）</span></span><br><span class="line">git fetch --prune                                         <span class="comment"># 获取所有原创分支并清除服务器上已删掉的分支</span></span><br><span class="line">git pull origin master                                    <span class="comment"># 获取远程分支master并merge到当前分支</span></span><br><span class="line">git <span class="built_in">mv</span> README README2                                     <span class="comment"># 重命名文件README为README2</span></span><br><span class="line">git reset --hard HEAD                                     <span class="comment"># 将当前版本重置为HEAD（通常用于merge失败回退）</span></span><br><span class="line">git rebase</span><br><span class="line">git branch -d hotfixes/BJVEP933                           <span class="comment"># 删除分支hotfixes/BJVEP933（本分支修改已合并到其他分支）</span></span><br><span class="line">git branch -D hotfixes/BJVEP933                           <span class="comment"># 强制删除分支hotfixes/BJVEP933</span></span><br><span class="line">git ls-files                                              <span class="comment"># 列出git index包含的文件</span></span><br><span class="line">git show-branch                                           <span class="comment"># 图示当前分支历史</span></span><br><span class="line">git show-branch --all                                     <span class="comment"># 图示所有分支历史</span></span><br><span class="line">git whatchanged                                           <span class="comment"># 显示提交历史对应的文件修改</span></span><br><span class="line">git revert dfb02e6e4f2f7b573337763e5c0013802e392818       <span class="comment"># 撤销提交dfb02e6e4f2f7b573337763e5c0013802e392818</span></span><br><span class="line">git ls-tree HEAD                                          <span class="comment"># 内部命令：显示某个git对象</span></span><br><span class="line">git rev-parse v2.0                                        <span class="comment"># 内部命令：显示某个ref对于的SHA1 HASH</span></span><br><span class="line">git reflog                                                <span class="comment"># 显示所有提交，包括孤立节点</span></span><br><span class="line">git show HEAD@&#123;5&#125;</span><br><span class="line">git show master@&#123;yesterday&#125;                               <span class="comment"># 显示master分支昨天的状态</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=format:<span class="string">&#x27;%h %s&#x27;</span> --graph                   <span class="comment"># 图示提交日志</span></span><br><span class="line">git show HEAD~3</span><br><span class="line">git show -s --pretty=raw 2be7fcb476</span><br><span class="line">git stash                                                 <span class="comment"># 暂存当前修改，将所有至为HEAD状态</span></span><br><span class="line">git stash list                                            <span class="comment"># 查看所有暂存</span></span><br><span class="line">git stash show -p stash@&#123;0&#125;                               <span class="comment"># 参考第一次暂存</span></span><br><span class="line">git stash apply stash@&#123;0&#125;                                 <span class="comment"># 应用第一次暂存</span></span><br><span class="line">git grep <span class="string">&quot;delete from&quot;</span>                                    <span class="comment"># 文件中搜索文本“delete from”</span></span><br><span class="line">git grep -e <span class="string">&#x27;#define&#x27;</span> --and -e SORT_DIRENT</span><br><span class="line">git gc</span><br><span class="line">git fsck</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/08/Android%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E6%82%AC%E6%B5%AE%E6%A1%86%E5%8A%9F%E8%83%BD%E4%BB%A3%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/08/Android%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E6%82%AC%E6%B5%AE%E6%A1%86%E5%8A%9F%E8%83%BD%E4%BB%A3%E7%A0%81/" class="post-title-link" itemprop="url">Android创建应用悬浮框功能代码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-08 10:44:05" itemprop="dateCreated datePublished" datetime="2018-01-08T10:44:05+08:00">2018-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/08/Android%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E6%82%AC%E6%B5%AE%E6%A1%86%E5%8A%9F%E8%83%BD%E4%BB%A3%E7%A0%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2018/01/08/%E5%AE%9E%E7%8E%B0%E5%8F%AF%E5%AE%9A%E5%88%B6Drawable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/01/08/%E5%AE%9E%E7%8E%B0%E5%8F%AF%E5%AE%9A%E5%88%B6Drawable/" class="post-title-link" itemprop="url">实现可定制Drawable</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-01-08 10:40:16" itemprop="dateCreated datePublished" datetime="2018-01-08T10:40:16+08:00">2018-01-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Android%E7%A0%94%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">Android研发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package com.hupu.android.util;</span><br><span class="line"></span><br><span class="line">import android.graphics.Color;</span><br><span class="line">import android.graphics.drawable.Drawable;</span><br><span class="line">import android.graphics.drawable.GradientDrawable;</span><br><span class="line">import android.view.View;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* Created by wanglei on 16/8/1.</span><br><span class="line">*/</span><br><span class="line">public class HPDrawableGenerator &#123;</span><br><span class="line">private int roundRadius = 15; // 8dp 圆角半径</span><br><span class="line">private int strokeColor = Color.parseColor(&quot;#2E3135&quot;);//边框颜色</span><br><span class="line">private int fillColor = Color.parseColor(&quot;#DFDFE0&quot;);//内部填充颜色</span><br><span class="line">private int strokeWidth = 5;//设置边框宽度</span><br><span class="line"></span><br><span class="line">private HPDrawableGenerator() &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static class LazyHolder &#123;</span><br><span class="line">private static final HPDrawableGenerator INSTANCE = new HPDrawableGenerator();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static final HPDrawableGenerator getInstance() &#123;</span><br><span class="line">return LazyHolder.INSTANCE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public HPDrawableGenerator setRoundRadius(int roundRadius) &#123;</span><br><span class="line">this.roundRadius = roundRadius;</span><br><span class="line">return getInstance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public HPDrawableGenerator setFillColor(int fillColor) &#123;</span><br><span class="line">this.fillColor = fillColor;</span><br><span class="line">return getInstance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public HPDrawableGenerator setStrokeColor(int strokeColor) &#123;</span><br><span class="line">this.strokeColor = strokeColor;</span><br><span class="line">return getInstance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void setStrokeWidth(int strokeWidth) &#123;</span><br><span class="line">this.strokeWidth = strokeWidth;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private Drawable generateDrawable() &#123;</span><br><span class="line">GradientDrawable gd = new GradientDrawable();//创建drawable</span><br><span class="line">gd.setColor(fillColor);</span><br><span class="line">gd.setCornerRadius(roundRadius);</span><br><span class="line">gd.setStroke(strokeWidth, strokeColor);</span><br><span class="line">return gd;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//设置视图边框</span><br><span class="line">public void setViewBg(View v) &#123;</span><br><span class="line">v.setBackgroundDrawable(generateDrawable());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/01/08/%E5%AE%9E%E7%8E%B0%E5%8F%AF%E5%AE%9A%E5%88%B6Drawable/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Buffer</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

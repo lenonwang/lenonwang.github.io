@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"lenonwang.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.13.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文详细记录一下本站的建立过程，以便查阅。本文的运行环境：  12345node: v16.13.0npm: 8.1.4hexo: 5.4.0hexo-cli: 4.3.0NexT: 8.8.1 准备工作 准备工作主要参考了 Hexo 官方文档。 安装 Git 与 Node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo搭建静态博客">
+<meta property="og:url" content="https://lenonwang.github.io/2023/04/18/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="程序猿">
+<meta property="og:description" content="本文详细记录一下本站的建立过程，以便查阅。本文的运行环境：  12345node: v16.13.0npm: 8.1.4hexo: 5.4.0hexo-cli: 4.3.0NexT: 8.8.1 准备工作 准备工作主要参考了 Hexo 官方文档。 安装 Git 与 Node.js">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-18T04:35:29.000Z">
+<meta property="article:modified_time" content="2025-10-19T11:42:35.216Z">
+<meta property="article:author" content="Buffer">
+<meta property="article:tag" content="IT">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://lenonwang.github.io/2023/04/18/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://lenonwang.github.io/2023/04/18/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/","path":"2023/04/18/hexo搭建静态博客/","title":"hexo搭建静态博客"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hexo搭建静态博客 | 程序猿</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">程序猿</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Half as much, twice as elegant.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Git-%E4%B8%8E-Node-js"><span class="nav-number">2.</span> <span class="nav-text">安装 Git 与 Node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="nav-number">3.</span> <span class="nav-text">安装 Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C-GitHub-%E5%B9%B6%E6%96%B0%E5%BB%BA%E4%B8%AA%E4%BA%BA%E4%BB%93%E5%BA%93"><span class="nav-number">4.</span> <span class="nav-text">注册 GitHub 并新建个人仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-Git-%E4%B8%8E%E5%AF%86%E9%92%A5%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">设置 Git 与密钥文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E5%BB%BA%E7%AB%99"><span class="nav-number">6.</span> <span class="nav-text">开始建站</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">6.0.1.</span> <span class="nav-text">博客初始化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-config-yml"><span class="nav-number">6.0.2.</span> <span class="nav-text">设置_config.yml</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E9%83%A8%E7%BD%B2"><span class="nav-number">7.</span> <span class="nav-text">首次部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-number">8.</span> <span class="nav-text">设置自动部署</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%B0%86%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%87%E4%BB%BD%E8%87%B3%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="nav-number">8.0.1.</span> <span class="nav-text">将源文件备份至私有仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE-GitHub-Actions"><span class="nav-number">8.0.2.</span> <span class="nav-text">设置 GitHub Actions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Markdown-%E8%AF%AD%E6%B3%95%E6%89%A9%E5%B1%95"><span class="nav-number">9.</span> <span class="nav-text">安装 Markdown 语法扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%8D%A2%E4%B8%BB%E9%A2%98"><span class="nav-number">10.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-NexT"><span class="nav-number">11.</span> <span class="nav-text">安装 NexT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">12.</span> <span class="nav-text">修改主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E6%A0%B7%E5%BC%8F%E4%B8%8E%E6%9A%97%E8%89%B2%E6%A8%A1%E5%BC%8F"><span class="nav-number">12.0.1.</span> <span class="nav-text">主题样式与暗色模式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%8F%9C%E5%8D%95%E4%B8%8E%E4%BE%A7%E8%BE%B9%E6%A0%8F%E9%A1%B9%E7%9B%AE"><span class="nav-number">12.0.2.</span> <span class="nav-text">菜单与侧边栏项目</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BD%91%E7%AB%99%E5%9B%BE%E6%A0%87%E4%B8%8E%E5%A4%B4%E5%83%8F"><span class="nav-number">12.0.3.</span> <span class="nav-text">网站图标与头像</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE%E8%AE%BE%E7%BD%AE"><span class="nav-number">12.0.4.</span> <span class="nav-text">知识共享许可协议设置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97%E6%A0%B7%E5%BC%8F"><span class="nav-number">12.0.5.</span> <span class="nav-text">代码块样式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%BF%9B%E5%BA%A6%E3%80%81%E4%B9%A6%E7%AD%BE%E4%B8%8E-GitHub-%E6%A8%AA%E5%B9%85"><span class="nav-number">12.0.6.</span> <span class="nav-text">阅读进度、书签与 GitHub 横幅</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="nav-number">12.0.7.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%AD%E8%8B%B1%E6%96%87%E8%87%AA%E5%8A%A8%E7%A9%BA%E6%A0%BC"><span class="nav-number">12.0.8.</span> <span class="nav-text">设置中英文自动空格</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1"><span class="nav-number">13.</span> <span class="nav-text">增加第三方服务</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#LeanCloud-%E9%98%85%E8%AF%BB%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD"><span class="nav-number">13.0.1.</span> <span class="nav-text">LeanCloud 阅读统计功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Valine-%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F"><span class="nav-number">13.0.2.</span> <span class="nav-text">Valine 评论系统</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%8D%E8%92%9C%E5%AD%90%E7%BD%91%E9%A1%B5%E8%AE%A1%E6%95%B0%E5%99%A8%E5%8A%9F%E8%83%BD"><span class="nav-number">13.0.3.</span> <span class="nav-text">不蒜子网页计数器功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Local-Search-%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD"><span class="nav-number">13.0.4.</span> <span class="nav-text">Local Search 搜索功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Counter-%E5%AD%97%E6%95%B0%E7%BB%9F%E8%AE%A1%E4%B8%8E%E9%98%85%E8%AF%BB%E6%97%B6%E9%95%BF%E5%8A%9F%E8%83%BD"><span class="nav-number">13.0.5.</span> <span class="nav-text">Word Counter 字数统计与阅读时长功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%96%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">14.</span> <span class="nav-text">外网访问</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E8%B4%AD%E4%B9%B0%E5%9F%9F%E5%90%8D"><span class="nav-number">14.0.1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D%E5%B9%B6%E6%B7%BB%E5%8A%A0-CNAME"><span class="nav-number">14.0.2.</span> <span class="nav-text">绑定域名并添加 CNAME</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%AE%BE%E7%BD%AE"><span class="nav-number">14.0.3.</span> <span class="nav-text">其他设置</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Buffer"
+      src="/uploads/apple-touch-icon.png">
+  <p class="site-author-name" itemprop="name">Buffer</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/lenonwang" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lenonwang.github.io/2023/04/18/hexo%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/apple-touch-icon.png">
+      <meta itemprop="name" content="Buffer">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序猿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hexo搭建静态博客 | 程序猿">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo搭建静态博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-04-18 12:35:29" itemprop="dateCreated datePublished" datetime="2023-04-18T12:35:29+08:00">2023-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-19 19:42:35" itemprop="dateModified" datetime="2025-10-19T19:42:35+08:00">2025-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>本文详细记录一下本站的建立过程，以便查阅。本文的运行环境：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">node</span>: v16<span class="number">.13</span><span class="number">.0</span></span><br><span class="line"><span class="attr">npm</span>: <span class="number">8.1</span><span class="number">.4</span></span><br><span class="line"><span class="attr">hexo</span>: <span class="number">5.4</span><span class="number">.0</span></span><br><span class="line">hexo-<span class="attr">cli</span>: <span class="number">4.3</span><span class="number">.0</span></span><br><span class="line"><span class="title class_">NexT</span>: <span class="number">8.8</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<h4 id="准备工作">准备工作</h4>
+<p>准备工作主要参考了 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo 官方文档</a>。</p>
+<h4 id="安装-Git-与-Node-js">安装 Git 与 Node.js</h4>
+<span id="more"></span>
+<p>在 Mac 上最方便的方法当然是通过 <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，可能在安装之前需要先安装 Command Line Tools for Xcode。直接在终端输入 xcode-select --install 安装。</p>
+</blockquote>
+<p>安装好 Homebrew 后，直接使用以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install git</span><br><span class="line">brew install node</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在安装以上两个依赖之前，可以先运行 brew update 来更新 Homebrew。此外，还可以运行 brew doctor 检查一下有没有什么冲突，可以及时处理。也可以把以下语句加入你的.bash_profile 或者.zshrc，取决于你使用的 shell：<br>
+.bash_profile:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="variable constant_">PATH</span>=<span class="string">&quot;/usr/local/bin:$PATH&quot;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>安装好后，可以用以下命令查看是否安装成功，成功则会返回版本号：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<h4 id="安装-Hexo">安装 Hexo</h4>
+<p>直接使用 npm 安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>查看一下 hexo 是否安装成功，会返回当前的 hexo 版本号：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<h4 id="注册-GitHub-并新建个人仓库">注册 GitHub 并新建个人仓库</h4>
+<p>GitHub 就不用多说了。注册完成后，新建公有仓库，<a target="_blank" rel="noopener" href="http://xn--GitHub-vy7im2f09qia9990brrzccydl2o.github.io">名称为你的GitHub用户名.github.io</a>，比如我的就叫做 <a target="_blank" rel="noopener" href="http://bambrow.github.io">bambrow.github.io</a>。这个仓库用来存放渲染好的页面。</p>
+<p>此外，我们再新建一个私有仓库，用来存放源文件本身。仓库的名字任意取，我取的名字是 blog。</p>
+<p>这两个仓库最好不要初始化任何东西，也就是 README，.gitignore 和 license 都不要。这样新建的仓库完全是空的。</p>
+<h4 id="设置-Git-与密钥文件">设置 Git 与密钥文件</h4>
+<p>首先运行以下两句进行 Git 配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="variable language_">global</span> user.<span class="property">name</span> <span class="string">&quot;GitHub用户名&quot;</span></span><br><span class="line">git config --<span class="variable language_">global</span> user.<span class="property">email</span> <span class="string">&quot;GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>其中把用户名和邮箱替换成你自己的。然后我们生成密钥文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>直接一路回车下去就好，结束后会在 ~/.ssh/ 文件夹里生成 id_rsa 私钥文件与 id_rsa.pub 公钥文件。我们读取一下公钥的内容并且手动拷贝：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa.<span class="property">pub</span></span><br></pre></td></tr></table></figure>
+<p>手动复制显示的内容。随后打开这个页面设置 SSH Key。你也可以在 GitHub 主页点击你的右上角头像，选择 Settings，然后选择 SSH and GPG Keys 找到这个界面。点击 New SSH Key，标题可以随便写，内容就是你刚才复制的公钥内容，随后保存。</p>
+<h4 id="开始建站">开始建站</h4>
+<h6 id="博客初始化">博客初始化</h6>
+<p>首先选择一个你喜欢的地方作为你的博客根目录。我自己选择了与 <a href="http://lenonwang.github.io">lenonwang.github.io</a> 的同名目录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~<span class="regexp">/git/</span>lenonwang.<span class="property">github</span>.<span class="property">io</span></span><br></pre></td></tr></table></figure>
+<p>随后按照官方教程，依次运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init ~<span class="regexp">/git/</span>bambrow.<span class="property">github</span>.<span class="property">io</span></span><br><span class="line">cd ~<span class="regexp">/git/</span>bambrow.<span class="property">github</span>.<span class="property">io</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>现在博客已经初始化完成了。使用以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>就可以在 <a target="_blank" rel="noopener" href="http://localhost:4000">http://localhost:4000</a> 看到你的站点了。可以在终端里使用 control+c 关掉本地服务器。下面列举一些常用的命令，更多命令与参数可以参考这里：</p>
+<ul>
+<li>hexo clean 用于清除缓存与静态文件。</li>
+<li>hexo new “文章标题” 用于新建文章。</li>
+<li>hexo server 用于启动本地服务器查看渲染好的网页，可简写为 hexo s。</li>
+<li>hexo generate 用于生成静态文件，可简写为 hexo g。</li>
+<li>hexo deploy 用于部署网站，需要先设置好_config.yml，可简写为 hexo d。</li>
+</ul>
+<h6 id="设置-config-yml">设置_config.yml</h6>
+<p>首先，可以参考官方的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">设置页面</a>，这里只涉及一些核心设置。</p>
+<p>用你喜欢的编辑器打开根目录下的_config.yml。在 Site 下面你可以更改网页的标题、副标题、描述、作者、语言、时区等等。语言这里选择 zh-CN。在 URL 下面可以把 url 改为你的 GitHub Pages 的 URL，<a target="_blank" rel="noopener" href="https://xn--GitHub-on9im33ani7aou3bged.github.io">https://你的GitHub用户名.github.io</a>。中间的大部分设置跳过，你也可以参照上面的网页进行修改。</p>
+<p>最后，我们重点关注一下# Deployment。在这里，我们需要把它改为如下的样式：<br>
+_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy</span>:</span><br><span class="line">  <span class="attr">type</span>: git</span><br><span class="line">  <span class="attr">repo</span>: 你的<span class="title class_">GitHub</span>目录地址</span><br><span class="line">  <span class="attr">branch</span>: master</span><br></pre></td></tr></table></figure>
+<p>其中 repo 要根据自己的情况修改。你可以在 GitHub 主页点击你的头像，选择 Your repositories，<a target="_blank" rel="noopener" href="http://xn--GitHub-on9ia511dx0fu90cdnzb3bm8seba.github.io">点击你的你的GitHub用户名.github.io</a> 仓库，点击 Code 按钮，然后点击 Use SSH（如果目前显示为 Clone with HTTPS），然后复制框中的内容到这里。</p>
+<p>修改好后，保存文件。</p>
+<h4 id="首次部署">首次部署</h4>
+<p>我们需要再安装一个依赖：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>随后一切就绪，依次运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>然后你就可以在 <a target="_blank" rel="noopener" href="https://xn--GitHub-on9im33ani7aou3bged.github.io">https://你的GitHub用户名.github.io</a> 看到渲染好的网页了。</p>
+<h4 id="设置自动部署">设置自动部署</h4>
+<p>在这一步里我们不仅备份了博客的源文件，也实现了修改 push 到 blog 私有仓库后触发 GitHub Actions 完成自动部署。</p>
+<h6 id="将源文件备份至私有仓库">将源文件备份至私有仓库</h6>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git remote add origin git@github.<span class="property">com</span>:bambrow/blog.<span class="property">git</span></span><br></pre></td></tr></table></figure>
+<p>这里的远程仓库就是你的 blog 仓库。把上面的 <a href="mailto:git@github.com">git@github.com</a>:bambrow/blog.git 修改成你自己的仓库地址。方法同样是在网页进入 blog 仓库，点击 Code 按钮，然后点击 Use SSH（如果目前显示为 Clone with HTTPS），然后复制框中的内容到这里。</p>
+<p>随后我们编辑一下.gitignore 文件。可以使用你喜欢的编辑器。一般来讲，.gitignore 应该有如下内容：<br>
+.gitignore</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.<span class="property">DS_Store</span></span><br><span class="line"><span class="title class_">Thumbs</span>.<span class="property">db</span></span><br><span class="line">db.<span class="property">json</span></span><br><span class="line">*.<span class="property">log</span></span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.<span class="property">deploy</span>*/</span><br></pre></td></tr></table></figure>
+<p>编辑好之后，先做：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+<p>随后把所有应该备份的文件 push 到 GitHub：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;initial commit&quot;</span></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>此时去 GitHub 上查看 blog 仓库，会发现内容已经更新。</p>
+<h6 id="设置-GitHub-Actions">设置 GitHub Actions</h6>
+<p>请注意，在做这一步之前，请务必确认自己的 blog 仓库是私有仓库，如果不是，一定要在设置里将其设置为私有。</p>
+<p>之前建立好的密钥文件，有公钥也有私钥。我们已经用过了公钥，这次使用私钥。首先读取其内容并手动拷贝：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~<span class="regexp">/.ssh/i</span>d_rsa</span><br></pre></td></tr></table></figure>
+<p>手动复制全部内容。随后在网页上打开自己的 blog 仓库，点击 Settings，再点击左侧的 Secrets，随后新建。名称可以随意写，这里推荐 HEXO_DEPLOY_KEY；内容则是刚才复制的私钥全部内容。随后点击添加。</p>
+<p>随后，我们开始设置工作流。点击你的仓库标签下的 Actions，选择新建 New workflow。随后选择 set up a workflow yourself，将 main.yml 的内容替换如下，你也可以自行修改：</p>
+<p>.github/workflows/main.yml</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"># 工作流名称</span><br><span class="line"><span class="attr">name:</span> Hexo Blog Deploy</span><br><span class="line"></span><br><span class="line"># 只在push到master分支的时候启动</span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="symbol">push:</span></span><br><span class="line">    <span class="symbol">branches:</span></span><br><span class="line">      - master</span><br><span class="line"></span><br><span class="line"># 使用ubuntu虚拟机</span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="symbol">build:</span></span><br><span class="line">    runs-<span class="attr">on:</span> ubuntu-latest</span><br><span class="line"></span><br><span class="line">    # 工作流步骤</span><br><span class="line">    <span class="symbol">steps:</span></span><br><span class="line">    - <span class="attr">name:</span> Checkout repository master branch</span><br><span class="line">      <span class="symbol">uses:</span> actions/checkout<span class="meta">@master</span></span><br><span class="line"></span><br><span class="line">    # 安装Node.js</span><br><span class="line">    - <span class="attr">name:</span> Install node.js</span><br><span class="line">      <span class="symbol">uses:</span> actions/setup-node<span class="meta">@master</span></span><br><span class="line">      <span class="symbol">with:</span></span><br><span class="line">        node-<span class="attr">version:</span> <span class="string">&quot;16.x&quot;</span></span><br><span class="line"></span><br><span class="line">    # 安装Hexo</span><br><span class="line">    - <span class="attr">name:</span> Install hexo</span><br><span class="line">      <span class="symbol">run:</span> |</span><br><span class="line">        npm install hexo-cli -g</span><br><span class="line">        npm install</span><br><span class="line"></span><br><span class="line">    # 设置SSH密钥，读取HEXO_DEPLOY_KEY</span><br><span class="line">    - <span class="attr">name:</span> Setup <span class="keyword">private</span> key</span><br><span class="line">      <span class="symbol">env:</span></span><br><span class="line">        <span class="symbol">HEXO_DEPLOY_KEY:</span> $&#123;&#123; secrets.HEXO_DEPLOY_KEY &#125;&#125;</span><br><span class="line">      <span class="symbol">run:</span> |</span><br><span class="line">        mkdir -p <span class="regexp">~/.ssh/</span></span><br><span class="line">        echo <span class="string">&quot;$HEXO_DEPLOY_KEY&quot;</span> &gt; <span class="regexp">~/.ssh/</span>id_rsa</span><br><span class="line">        chmod <span class="number">600</span> <span class="regexp">~/.ssh/</span>id_rsa</span><br><span class="line">        ssh-keyscan github.com &gt;&gt; <span class="regexp">~/.ssh/</span>known_hosts</span><br><span class="line"></span><br><span class="line">    # 配置Git设置</span><br><span class="line">    - <span class="attr">name:</span> Setup git settings</span><br><span class="line">      <span class="symbol">run:</span> |</span><br><span class="line">        git config --global user.name <span class="string">&quot;GitHub用户名&quot;</span></span><br><span class="line">        git config --global user.email <span class="string">&quot;GitHub邮箱&quot;</span></span><br><span class="line">    # 更改上面的用户名和邮箱</span><br><span class="line"></span><br><span class="line">    # 部署</span><br><span class="line">    - <span class="attr">name:</span> Deploy hexo</span><br><span class="line">      <span class="symbol">run:</span> |</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo generate</span><br><span class="line">        hexo deploy</span><br></pre></td></tr></table></figure>
+<p>随后点击 Start commit 结束设置。这样以后只要有新的改动被 push 到 blog 的主分支，就会触发这个工作流，将网页渲染出来，同时也会 push <a target="_blank" rel="noopener" href="http://xn--GitHub-on9i35q4we8x8b7s7beod.github.io">到你的GitHub用户名.github.io</a> 这个仓库里。</p>
+<h4 id="安装-Markdown-语法扩展">安装 Markdown 语法扩展</h4>
+<p>Hexo 原生的 Markdown 渲染插件支持的 Markdown 语法不够丰富，比如不支持 GitHub Flavored Markdown、CommonMark、上标下标、脚注等等。因此，我们在写文章之前，可以把原生的插件 hexo-renderer-marked 改为 hexo-renderer-markdown-it。</p>
+<p>首先，根据该插件的<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-markdown-it/wiki/Getting-Started">安装指南</a>，运行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked</span><br><span class="line">npm install hexo-renderer-markdown-it</span><br></pre></td></tr></table></figure>
+<p>随后在_config.yml 里添加如下语句（可以添加在 deploy 前面）：</p>
+<p>_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># <span class="title class_">Markdown</span>-it config</span><br><span class="line">## <span class="title class_">Docs</span>: <span class="attr">https</span>:<span class="comment">//github.com/celsomiranda/hexo-renderer-markdown-it/wiki</span></span><br><span class="line"><span class="attr">markdown</span>:</span><br><span class="line">  <span class="attr">preset</span>: <span class="string">&#x27;default&#x27;</span></span><br><span class="line">  <span class="attr">render</span>:</span><br><span class="line">    <span class="attr">html</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">xhtmlOut</span>: <span class="literal">false</span></span><br><span class="line">    <span class="attr">langPrefix</span>: <span class="string">&#x27;language-&#x27;</span></span><br><span class="line">    <span class="attr">breaks</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">linkify</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">typographer</span>: <span class="literal">true</span></span><br><span class="line">    <span class="attr">quotes</span>: <span class="string">&#x27;“”‘’&#x27;</span></span><br><span class="line">  <span class="attr">enable_rules</span>:</span><br><span class="line">  <span class="attr">disable_rules</span>:</span><br><span class="line">  <span class="attr">plugins</span>:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-cjk-breaks</span><br><span class="line">    - markdown-it-emoji</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-mark</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">  <span class="attr">anchors</span>:</span><br><span class="line">    <span class="attr">level</span>: <span class="number">2</span></span><br><span class="line">    <span class="attr">collisionSuffix</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="attr">permalink</span>: <span class="literal">false</span></span><br><span class="line">    <span class="attr">permalinkClass</span>: <span class="string">&#x27;header-anchor&#x27;</span></span><br><span class="line">    <span class="attr">permalinkSide</span>: <span class="string">&#x27;left&#x27;</span></span><br><span class="line">    <span class="attr">permalinkSymbol</span>: <span class="string">&#x27;¶&#x27;</span></span><br><span class="line">    <span class="attr">case</span>: <span class="number">0</span></span><br><span class="line">    <span class="attr">separator</span>: <span class="string">&#x27;-&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>随后你就可以使用扩展语法了。使用方法可以参看这里和这里，尤其是后一个网页给出了很详细的例子。</p>
+<p>如果你觉得脚注字体偏大，可以看Hexo NexT 主题的<a target="_blank" rel="noopener" href="https://bambrow.com/20200718-hexo-next-font-settings/">字体更换</a>，看完后就知道怎么修改了。我个人做了如下设置：<br>
+source/_data/styles.styl</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.<span class="property">footnotes</span> &#123;</span><br><span class="line">    font-<span class="attr">size</span>: <span class="number">75</span>%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为我们上一步卸载了一个插件，所以也要改一下工作流文件，在安装Hexo 那一步加一个步骤，卸载这个依赖。你可以在本地修改.github/workflows/main.yml 的内容，也可以在 GitHub 的 blog 仓库，点击 Actions，选择最近的一次部署，点击右侧的省略号中的 View workflow file，然后点击右侧的铅笔按钮进行修改。将卸载依赖写在 npm install 那一行后面即可。如果你采用后者，在你将本地新的改动 push 到 GitHub 之前，要记得先做 git pull，否则会报错显示远程仓库有新的改动。推荐在本地修改，一步到位。</p>
+<p>.github/workflows/main.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">run</span>: |</span><br><span class="line">  npm install hexo-cli -g</span><br><span class="line">  npm install</span><br><span class="line">+ npm uninstall hexo-renderer-marked</span><br></pre></td></tr></table></figure>
+<h4 id="更换主题">更换主题</h4>
+<p>我们这里选择的是 NexT 主题。Hexo 支持许多主题，你也可以选择自己喜欢的主题。</p>
+<h4 id="安装-NexT">安装 NexT</h4>
+<p>NexT 是非常流行的 Hexo 主题。根据这个网站，该项目几经易手，经历过很多不同的版本。我们现在当然是采用目前的最新版本。</p>
+<p>首先我们运行 hexo -v 与 npm -v 查看一下 Hexo 与 Node.js 的版本，确保它们大于<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next#readme">这个链接</a>里所示的版本最低要求。</p>
+<p>以下步骤主要参考了 NexT <a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/getting-started/">官方文档</a>。还是在博客的根目录里，运行如下命令（同时卸载默认主题，同样，卸载语句也应加入工作流）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next</span><br><span class="line">npm uninstall hexo-theme-landscape # 加入工作流 <span class="title class_">Install</span> hexo 部分</span><br></pre></td></tr></table></figure>
+<p>新主题就下载好了。下一步，我们打开站点配置文件_config.yml，找到 theme 那一行并改为 theme: next，主题就更换完毕了。接下来需要拷贝主题的配置文件（以及删除旧主题的配置文件）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm -f _config.<span class="property">landscape</span>.<span class="property">yml</span></span><br><span class="line">cp node_modules/hexo-theme-next/_config.<span class="property">yml</span> _config.<span class="property">next</span>.<span class="property">yml</span></span><br></pre></td></tr></table></figure>
+<p>你可以运行 hexo clean; hexo g; hexo s 来查看效果。</p>
+<h4 id="修改主题配置">修改主题配置</h4>
+<p>主题配置的修改主要在_config.next.yml 中进行。这里讲几个主要的配置。</p>
+<h6 id="主题样式与暗色模式">主题样式与暗色模式</h6>
+<p>主题样式在# Schemes 下面。一共有四种样式，分别是 Muse，Mist，Pisces 和 Gemini。其中前两种是单栏样式，后两种是双栏样式，如果要更改，只需注释掉当前样式，再取消注释想要更改的样式即可。</p>
+<p>在下方的 Dark Mode 选项里，你可以选择为网页开启暗色模式，只需要把 false 变成 true 即可。</p>
+<h6 id="菜单与侧边栏项目">菜单与侧边栏项目</h6>
+<p>在# Menu Settings 下面你可以选择开启菜单项目。它们都是默认关闭（被注释掉）的。需要哪一项，取消注释即可。</p>
+<p>注意，除了 home 与 archives，其他的页面需要手动添加。比如，你想要开启 about 页面，那么就要在 Hexo 根目录下运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo <span class="keyword">new</span> page <span class="string">&quot;about&quot;</span></span><br></pre></td></tr></table></figure>
+<p>随后在 source 文件夹下面就会生成 about 目录，里面有 <a target="_blank" rel="noopener" href="http://index.md">index.md</a> 文件。你可以更改文件内的标题，随后在 date 行下面加一句：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ <span class="attr">type</span>: <span class="string">&quot;about&quot;</span></span><br></pre></td></tr></table></figure>
+<p>如果需要还可以加上 comments: false 来为这个页面关闭评论（后文会讲到如何添加评论功能）。</p>
+<p>这里举个简单的例子，假如我们要新建一个菜单项目叫做 notes，首先在# Menu Settings 的 menu 下面新建一行：</p>
+<p>_config.next.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu</span>:</span><br><span class="line">  <span class="attr">home</span>: / || fa fa-home</span><br><span class="line">  <span class="attr">about</span>: <span class="regexp">/about/</span> || fa fa-user</span><br><span class="line">  <span class="attr">tags</span>: <span class="regexp">/tags/</span> || fa fa-tags</span><br><span class="line">  <span class="attr">categories</span>: <span class="regexp">/categories/</span> || fa fa-th</span><br><span class="line">  <span class="attr">archives</span>: <span class="regexp">/archives/</span> || fa fa-archive</span><br><span class="line">  #<span class="attr">schedule</span>: <span class="regexp">/schedule/</span> || fa fa-calendar</span><br><span class="line">  #<span class="attr">sitemap</span>: /sitemap.<span class="property">xml</span> || fa fa-sitemap</span><br><span class="line">  #<span class="attr">commonweal</span>: <span class="regexp">/404/</span> || fa fa-heartbeat</span><br><span class="line">+ <span class="attr">notes</span>: <span class="regexp">/notes/</span> || fa fa-sticky-note</span><br></pre></td></tr></table></figure>
+<p>图标的代码可以去 <a target="_blank" rel="noopener" href="https://fontawesome.com/">Font Awesome</a> 网页上查找。随后如前面的例子，手动添加页面即可。如要添加自定义菜单的中文翻译，需要新建 source/_data/languages.yml 文件，然后写入如下内容：<br>
+source/_data/languages.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zh-<span class="attr">CN</span>:</span><br><span class="line">  <span class="attr">menu</span>:</span><br><span class="line">    <span class="attr">notes</span>: 笔记</span><br></pre></td></tr></table></figure>
+<p>任何翻译都可以在这个文件里设置或覆盖。</p>
+<p>此外，在# Sidebar Settings 下面可以找到关于侧边栏的一些设置。除了它本身的一些参数，你还可以设置其中的一些内容，比如 social 下面可以开启你的社交网络账号与主页。另外，搜索 back2top 还可以让你把回到首页的按钮放在侧边栏，并开启阅读进度百分比功能。</p>
+<h6 id="网站图标与头像">网站图标与头像</h6>
+<p>网站图标可以在# Site Information Settings 的 favicon 下面找到。如果要更换，可以把图标放在 source/images/ 目录里（如果没有这个目录就自己新建）。教程还推荐了<a target="_blank" rel="noopener" href="https://realfavicongenerator.net/">这个网站</a>来生成你自己的图标。</p>
+<p>头像则在侧边栏设置的# Sidebar Avatar 下面。你可以把头像放在 source/uploads/ 目录里（如果没有这个目录就自己新建）。</p>
+<h6 id="知识共享许可协议设置">知识共享许可协议设置</h6>
+<p>Creative Commons 设置可以搜索 creative_commons。它支持多种协议，默认是 by-nc-sa。更多协议可以参考<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%9F%A5%E8%AF%86%E5%85%B1%E4%BA%AB%E8%AE%B8%E5%8F%AF%E5%8D%8F%E8%AE%AE">维基百科的解释</a>。</p>
+<p>代码块样式你可以在这里查看并选择你喜欢的样式，随后搜索 codeblock 修改。你还可以打开复制按钮，方便读者复制代码块里的内容。</p>
+<h6 id="代码块样式">代码块样式</h6>
+<p>你可以在<a target="_blank" rel="noopener" href="https://theme-next.js.org/highlight/">这里查看</a>并选择你喜欢的样式，随后搜索 codeblock 修改。你还可以打开复制按钮，方便读者复制代码块里的内容。</p>
+<h6 id="阅读进度、书签与-GitHub-横幅">阅读进度、书签与 GitHub 横幅</h6>
+<p>搜索 reading_progress 即可开启阅读进度功能。还可以在 bookmark 开启书签功能，读者可以选择点击书签图标来保存阅读进度，下次进入这篇文章时就可以继续阅读。</p>
+<p>下面的 github_banner 可以让你开启 GitHub 横幅，它会在网页右上角显示一个小横幅，直通你的 GitHub 主页。</p>
+<h6 id="字体设置">字体设置</h6>
+<p>在# Font Settings 可以更改字体设置，NexT 允许你更改全局字体、网站标题字体、h1-h6 标题字体，文章字体与代码字体。如果你的定制程度比较高，还是参看<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/miscellaneous.html#Fonts-Customization">官方教程</a>比较好。</p>
+<h6 id="设置中英文自动空格">设置中英文自动空格</h6>
+<p>这个功能已经内置在 NexT 主题中。在_config.next.yml 中搜索并开启 pangu 即可。</p>
+<h4 id="增加第三方服务">增加第三方服务</h4>
+<p>同样，<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/third-party-services/">官方教程</a>还是比较详细的，解释了很多第三方插件的用法，囊括了数学公式、评论系统、网站统计与分析、评分与分享小部件、搜索功能、即时聊天室等等。这里只讲一下我个人开启的服务。</p>
+<h6 id="LeanCloud-阅读统计功能">LeanCloud 阅读统计功能</h6>
+<p>这部分参考了<a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/zh-CN/LEANCLOUD-COUNTER-SECURITY.md">这篇文章</a>。</p>
+<p>注册 LeanCloud 时，建议注册<a target="_blank" rel="noopener" href="https://leancloud.app/">国际版</a>，<a target="_blank" rel="noopener" href="https://www.leancloud.cn/">国内版</a>要验证的东西比较多。然后新建一个应用，名字可以任意写。随后打开应用，点击存储条目下的结构化数据，然后点击创建 Class，名称为 Counter，其他保持默认。随后去设置里的应用Keys 记下 AppID 与 AppKey。</p>
+<p>打开_config.next.yml，搜索 leancloud_visitors，将其打开，填写刚才的 AppID 与 AppKey，security 也设置为打开。随后的步骤比较多且复杂，请参考上面的文章，但是介于现在 LeanCloud 又有更新，所以做一点补充说明。</p>
+<p>首先，上面的参考文章里，需要打开 NexT 主题配置文件的时候，我们统一打开_config.next.yml。其次，在博客配置文件_config.yml 里，在 theme:next 后面（你也可以添加到别的位置）添加的内容是：</p>
+<p>_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">leancloud_counter_security</span>:</span><br><span class="line">  <span class="attr">enable_sync</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">app_id</span>: 你的<span class="title class_">AppID</span></span><br><span class="line">  <span class="attr">app_key</span>: 你的<span class="title class_">AppKey</span></span><br><span class="line">  <span class="attr">username</span>: 你用<span class="string">&quot;hexo lc-counter register&quot;</span>注册的用户名</span><br><span class="line">  <span class="attr">password</span>: 你用<span class="string">&quot;hexo lc-counter register&quot;</span>注册的密码</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>记得在这之前要安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-leancloud-counter-security</span><br></pre></td></tr></table></figure>
+<p>然后，在配置 deploy 的时候，因为我们多加了一项，所以应该改为：<br>
+_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy</span>:</span><br><span class="line">  - <span class="attr">type</span>: git</span><br><span class="line">    <span class="attr">repo</span>: 你的<span class="title class_">GitHub</span>目录地址</span><br><span class="line">    <span class="attr">branch</span>: master</span><br><span class="line">  - <span class="attr">type</span>: leancloud_counter_security_sync</span><br></pre></td></tr></table></figure>
+<p>也就是每一个 type 前面都要加上 -。</p>
+<p>随后，在设置 Counter 的权限时，我们在 add_field 与 create 均选择指定用户，随后在用户名里输入你用 hexo lc-counter register 注册的用户名，它会自动找到对应的用户。在设置完后，两项都应该显示 0 Role, 1 User。对于 delete，选择指定用户留空即可，会显示显示 0 Role, 0 User。</p>
+<blockquote>
+<p>请注意，当前版本的 hexo-leancloud-counter-security 插件存在 bug，而且官方并未修复。这会导致 GitHub Actions 部署错误。如果你遇到了这个问题，请参考 <a target="_blank" rel="noopener" href="https://bambrow.com/20211124-hexo-next-upgrade/">Hexo 静态博客升级指南</a> 里的 “远程部署” 部分进行修改。</p>
+</blockquote>
+<h6 id="Valine-评论系统">Valine 评论系统</h6>
+<blockquote>
+<p>根据这条 Github Issue，Valine 评论系统在 NexT v8.1.0 后被移除。理由如下：<br>
+Valine 使用 Leancloud 作为后端，是一个深受静态博客用户喜爱的评论系统。然而 Valine 暴露出了一些令人担忧的问题：<br>
+NexT 团队曾多次收到关于 Valine 评论系统存在隐私数据泄露的反馈；<br>
+Valine 自 1.4 版本起不再开源，发布的打包版本中存在未告知用户的百度统计代码；<br>
+2020 年 11 月下旬出现了针对 Valine 评论系统的网络攻击；<br>
+CVE-2021-34801<br>
+如需继续使用，需要额外安装插件。在项目根目录运行如下命令：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install next-theme/hexo-next-valine</span><br></pre></td></tr></table></figure>
+<p>Valine 即可正常运行。</p>
+<p>在前一步的基础上，在_config.next.yml 里的# Comments Settings 下面添加如下条目（建议添加在 Disqus 前面）：<br>
+_config.next.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># <span class="title class_">Valine</span></span><br><span class="line"># <span class="title class_">For</span> more <span class="attr">information</span>: <span class="attr">https</span>:<span class="comment">//valine.js.org, https://github.com/xCss/Valine</span></span><br><span class="line"><span class="attr">valine</span>:</span><br><span class="line">  <span class="attr">enable</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">appId</span>:  # your leancloud application appid</span><br><span class="line">  <span class="attr">appKey</span>:  # your leancloud application appkey</span><br><span class="line">  <span class="attr">serverURLs</span>: # <span class="title class_">When</span> the custom domain name is enabled, fill it <span class="keyword">in</span> here</span><br><span class="line">  <span class="attr">placeholder</span>: <span class="title class_">Just</span> go go # comment box placeholder</span><br><span class="line">  <span class="attr">avatar</span>: mm # gravatar style</span><br><span class="line">  <span class="attr">meta</span>: [nick, mail, link] # <span class="title class_">Custom</span> comment header</span><br><span class="line">  <span class="attr">pageSize</span>: <span class="number">10</span> # pagination size</span><br><span class="line">  <span class="attr">visitor</span>: <span class="literal">true</span> # leancloud-counter-security is not supported <span class="keyword">for</span> now. <span class="title class_">When</span> visitor is set to be <span class="literal">true</span>, appid and appkey are recommended to be the same <span class="keyword">as</span> leancloud_visitors<span class="string">&#x27; for counter compatibility. Article reading statistic https://valine.js.org/visitor.html</span></span><br><span class="line"><span class="string">  comment_count: true # If false, comment count will only be displayed in post page, not in home page</span></span><br><span class="line"><span class="string">  recordIP: false # Whether to record the commenter IP</span></span><br></pre></td></tr></table></figure>
+<p>随后填写 appId、appKey 即可。在这里，我们把 visitor 设置为 true，随后把上一步的 leancloud_visitors 下的 enable 设置为 false，因为两者之间有冲突。之后会考虑将评论系统从 Valine 迁出，会另外写文章说明。</p>
+<h6 id="不蒜子网页计数器功能">不蒜子网页计数器功能</h6>
+<p>这个功能可以显示网站的浏览量和访客数。在_config.next.yml 里找到 busuanzi_count，将其打开，因为我们已经开启了 LeanCloud 的计数功能，所以将 post_views 关掉（否则文章内部的阅读次数会有异常），其他保持打开即可。</p>
+<blockquote>
+<p>如果在本地测试，你会发现统计数据非常大，这是因为不蒜子通过域名统计，所以 localhost:4000 的数字会比较大，不必担心。</p>
+</blockquote>
+<h6 id="Local-Search-搜索功能">Local Search 搜索功能</h6>
+<p>首先在根目录安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb</span><br></pre></td></tr></table></figure>
+<p>随后，在博客配置文件_config.yml 里加入：</p>
+<p>_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search</span>:</span><br><span class="line">  <span class="attr">path</span>: search.<span class="property">xml</span></span><br><span class="line">  <span class="attr">field</span>: post</span><br><span class="line">  <span class="attr">format</span>: html</span><br><span class="line">  <span class="attr">limit</span>: <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>然后在_config.next.yml 里打开 local_search。</p>
+<h6 id="Word-Counter-字数统计与阅读时长功能">Word Counter 字数统计与阅读时长功能</h6>
+<p>首先在根目录安装：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-word-counter</span><br></pre></td></tr></table></figure>
+<p>随后，在博客配置文件_config.yml 里加入：</p>
+<p>_config.yml</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time</span>:</span><br><span class="line">  <span class="attr">symbols</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">time</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_symbols</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">total_time</span>: <span class="literal">true</span></span><br><span class="line">  <span class="attr">exclude_codeblock</span>: <span class="literal">false</span></span><br><span class="line">  <span class="attr">awl</span>: <span class="number">4</span></span><br><span class="line">  <span class="attr">wpm</span>: <span class="number">275</span></span><br><span class="line">  <span class="attr">suffix</span>: <span class="string">&quot;mins.&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="外网访问">外网访问</h4>
+<h6 id="购买域名">购买域名</h6>
+<p>现在我们的站点已经有模有样了，那就可以准备为它绑定一个域名了。首先第一步就是购买域名。国内国外都有众多域名服务商，本着少受一些限制的原则，推荐从国外几个知名的服务商购买。在网上可以搜到许多域名商的介绍与购买指南，这里就不赘述了。</p>
+<p>如果实在选择困难，可以去<a target="_blank" rel="noopener" href="https://www.domcomp.com/">这里</a>比较一下各家的价格。很多域名商首年或者首次转移都有优惠，如果不想每年都折腾，一定要记得对比一下续费价格，以及有没有隐藏费用。另外最好选择有 WHOIS 隐私保护的域名商，以及在付费的时候不要错选成那些乱七八糟的套餐，只买域名即可。</p>
+<h6 id="绑定域名并添加-CNAME">绑定域名并添加 CNAME</h6>
+<p>这一步主要参考了两篇文章，分别讲了使用 [1] 和不使用 [2]DNSPod 的情况，你可以视情况而定。我这里参考的是第二篇，也就是 GitHub 官方的指南。</p>
+<p><a target="_blank" rel="noopener" href="http://xn--GitHub-on9i73ki3gwxav22jrrzccydd09m.github.io">首先去你的GitHub用户名.github.io</a> 仓库中，点击 Settings，在 GitHub Pages 的 Custom domain 下输入你买好的域名，点击 Save 保存。</p>
+<p>此时你会发现下面的 Enforce HTTPS 被取消勾选，为了将其再次选中，需要以下的步骤。</p>
+<p>首先配置 CNAME，在 source 文件夹下建立一个新文件叫做 CNAME（不要带任何后缀），将你买好的域名输入进去。随后向 GitHub 提交这次修改。</p>
+<p>随后，打开你的域名商网站，为你的域名配置 DNS。不同的域名商可能有不太一样的步骤，你可以搜索你的域名商 + connect to github pages 来找到教程。在一般情况下，你需要设置 4 个 A 记录与 1 个 CNAME 记录，A 记录指向下面四个 IP 地址：</p>
+<p>185.199.108.153<br>
+185.199.109.153<br>
+185.199.110.153<br>
+185.199.111.153<br>
+CNAME 记录则设置为 www CNAME <a target="_blank" rel="noopener" href="http://xn--GitHub-on9im33ani7aou3bged.github.io">你的GitHub用户名.github.io</a>。详情可以参看教程里的设置 apex 域部分。</p>
+<p>随后刷新 GitHub 的设置页，看是否可以点选 Enforce HTTPS。有时候需要等一段时间才可以。你也可以在 Terminal 测试一下 DNS 是否配置正确（可能也需要等一段时间才会生效）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ dig bambrow.<span class="property">com</span> +noall +answer</span><br><span class="line"></span><br><span class="line">; &lt;&lt;&gt;&gt; <span class="title class_">DiG</span> <span class="number">9.10</span><span class="number">.6</span> &lt;&lt;&gt;&gt; bambrow.<span class="property">com</span> +noall +answer</span><br><span class="line">;; <span class="variable language_">global</span> <span class="attr">options</span>: +cmd</span><br><span class="line">lenonwang.<span class="property">com</span>.		<span class="number">194</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span></span><br><span class="line">lenonwang.<span class="property">com</span>.		<span class="number">194</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.111</span><span class="number">.153</span></span><br><span class="line">lenonwang.<span class="property">com</span>.		<span class="number">194</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.110</span><span class="number">.153</span></span><br><span class="line">lenonwang.<span class="property">com</span>.		<span class="number">194</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span></span><br></pre></td></tr></table></figure>
+<p>也可以在 dig 命令的域名前加上 www 看一下 CNAME 记录是否生效：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ dig www.<span class="property">bambrow</span>.<span class="property">com</span> +noall +answer</span><br><span class="line"></span><br><span class="line">; &lt;&lt;&gt;&gt; <span class="title class_">DiG</span> <span class="number">9.10</span><span class="number">.6</span> &lt;&lt;&gt;&gt; www.<span class="property">bambrow</span>.<span class="property">com</span> +noall +answer</span><br><span class="line">;; <span class="variable language_">global</span> <span class="attr">options</span>: +cmd</span><br><span class="line">www.<span class="property">bambrow</span>.<span class="property">com</span>.	<span class="number">299</span>	<span class="variable constant_">IN</span>	<span class="variable constant_">CNAME</span>	bambrow.<span class="property">github</span>.<span class="property">io</span>.</span><br><span class="line">bambrow.<span class="property">github</span>.<span class="property">io</span>.	<span class="number">3599</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.109</span><span class="number">.153</span></span><br><span class="line">bambrow.<span class="property">github</span>.<span class="property">io</span>.	<span class="number">3599</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.108</span><span class="number">.153</span></span><br><span class="line">bambrow.<span class="property">github</span>.<span class="property">io</span>.	<span class="number">3599</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.111</span><span class="number">.153</span></span><br><span class="line">bambrow.<span class="property">github</span>.<span class="property">io</span>.	<span class="number">3599</span>	<span class="variable constant_">IN</span>	A	<span class="number">185.199</span><span class="number">.110</span><span class="number">.153</span></span><br></pre></td></tr></table></figure>
+<h6 id="其他设置">其他设置</h6>
+<p>把_config.yml 的 url 修改为你的新域名。如果你配置了 LeanCloud，在应用中点击设置，点击安全中心，在 Web 安全域名把你的新域名加进去。现在基本上就大功告成了！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/IT/" rel="tag"># IT</a>
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/04/18/%E4%BD%BF%E7%94%A8iterm%E6%89%93%E9%80%A0%E8%B6%85%E7%BA%A7Mac%E7%BB%88%E7%AB%AF/" rel="prev" title="使用iterm打造超级Mac终端">
+                  <i class="fa fa-chevron-left"></i> 使用iterm打造超级Mac终端
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/04/18/Mac-m1%E8%8A%AF%E7%89%87-%E5%AE%89%E8%A3%85homebrew/" rel="next" title="Mac m1芯片 安装homebrew">
+                  Mac m1芯片 安装homebrew <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Buffer</span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
